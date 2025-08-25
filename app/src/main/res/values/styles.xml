@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 基于 Material3 的无 ActionBar 全屏主题 -->
+    <style name="Theme.Material3.DayNight.NoActionBar.FullScreen"
+        parent="Theme.Material3.DayNight.NoActionBar"> <!-- 正确继承 Material3 无 ActionBar 主题 -->
+
+        <!-- 隐藏状态栏（全屏） -->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <!-- 可选：允许内容延伸到刘海屏 -->
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+    </style>
+</resources>
