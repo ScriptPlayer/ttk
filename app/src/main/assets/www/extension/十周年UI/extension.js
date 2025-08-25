@@ -11259,7 +11259,7 @@ export default async function () {
 			},
 			dynamicSkinOutcrop: {
 				name: "动皮露头",
-				init: true,
+				init: false,
 				update() {
 					if (window.decadeUI) {
 						var enable = lib.config["extension_十周年UI_dynamicSkinOutcrop"];
@@ -11654,7 +11654,7 @@ export default async function () {
 			},
 			/*----阶段提示----*/
 			JDTS: {
-				init: true,
+				init: false,
 				intro: "自己回合内显示对应阶段图片提示",
 				name: "阶段提示",
 			},

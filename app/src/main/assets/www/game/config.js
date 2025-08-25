@@ -35,7 +35,7 @@ window.config = {
 	doubleclick_intro: true,
 	cheat: false,
 	volumn_background: 1,
-	volumn_audio: 8,
+	volumn_audio: 5,
 
 	connect_avatar: "caocao",
 	connect_nickname: "无名玩家",
@@ -97,7 +97,7 @@ window.config = {
 	show_round_menu: true,
 	show_pause: true,
 	show_auto: true,
-	show_volumn: true,
+	show_volumn: false,
 	show_cardpile: true,
 	only_fullskin: true,
 	show_connect: true,
