@@ -51,7 +51,9 @@
 }
 .blackBg.two {
   margin-top: 8px;
-  height: 218px;
+  /* height: 218px; */
+  /* height: 218px+115px; */
+  height: 90%;
 }
 .character-dialog .basicInfo {
   position: relative;
