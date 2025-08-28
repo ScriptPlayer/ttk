@@ -2568,9 +2568,6 @@ export class Create {
 		if (!lib.config.show_sortcard) {
 			ui.sortCard.style.display = "none";
 		}
-		ui.refreshWebBtn = ui.create.system("刷新", function () {
-			window.location.reload();
-		});
 		ui.doudizhuBtn = ui.create.system("地主", function () {
 			game.saveConfig("mode", "doudizhu");
 			localStorage.setItem("noname_0.9_directstart", true);
@@ -2580,6 +2577,9 @@ export class Create {
 			game.saveConfig("mode", "identity");
 			localStorage.setItem("noname_0.9_directstart", true);
 			game.reload();
+		});
+		ui.refreshWebBtn = ui.create.system("刷新", function () {
+			window.location.reload();
 		});
 		ui.lianjiBtn = ui.create.system("联机", function () {
 			game.saveConfig("mode", "connect");
@@ -3042,9 +3042,11 @@ export class Create {
 				if (!node.classList.contains("hidden")) {
 					node.classList.add("pressdown");
 				}
+				node.style.transform = 'scale(0.8)'; // 缩小到 80%
 			});
 			node.addEventListener(lib.config.touchscreen ? "touchend" : "mouseup", function (e) {
 				node.classList.remove("pressdown");
+				node.style.transform = 'scale(1)'; // 恢复为 100%
 			});
 			node.addEventListener(lib.config.touchscreen ? "touchmove" : "mousemove", function (e) {
 				node.classList.remove("pressdown");
