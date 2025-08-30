@@ -2107,11 +2107,17 @@ export default async function () {
 										}
 									}
 									var gainTo = function (cards, nodelay) {
+										//console.log('房主端获得牌方法========',get.cardsInfo(cards))
 										cards.duiMod = event.source;
 										if (player == game.me) {
+											//console.log('房主获得牌')
 											dui.layoutHandDraws(cards.reverse());
 											dui.queueNextFrameTick(dui.layoutHand, dui);
+											//后续保存的video对象修改可能要将gain12改为directgain（实测不改也行，非房主的录像手牌正常）
 											game.addVideo("gain12", player, [get.cardsInfo(fragment.childNodes), gaintag]);
+										}else{
+											//记录非房主获取到的牌，不加这行则非房主的录像看不到获得的牌
+											game.addVideo("directgain",player,get.cardsInfo(cards))
 										}
 
 										var s = player.getCards("s");
