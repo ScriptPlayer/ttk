@@ -61,7 +61,7 @@
 	width: 228px;
 	height: 228px;
 	opacity: 0;
-	background-image: url("assets/image/sprites_shadow_green.png");
+	background-image: url("./assets/image/sprites_shadow_orange.png");
 	background-repeat: no-repeat;
 	animation-name: kf-sprites-glow;
 	animation-duration: 0s;
@@ -71,22 +71,29 @@
 	animation-timing-function: steps(1);
 	pointer-events: none;
 	box-shadow: none;
-	transition: opacity 0.1s linear;
+	transition: opacity 0s linear;
 }
 
-#arena[data-shadow-style="off"]>.player.selected:not(.target):before,
+#arena[data-shadow-style="off"]>.player.selectable.selected.target:before,
+#arena[data-shadow-style="off"]>.player.selected:not(.target):before {
+	animation-duration: 0.9s;
+	background-image: url("./assets/image/sprites_shadow_orange.png");
+	opacity: 1;
+	z-index: 79;
+}
+
 #arena[data-shadow-style="off"]>.player.glow_phase:not(.selectable)::before {
 	animation-duration: 0.9s;
-	background-image: url("assets/image/sprites_shadow_green.png");
+	background-image: url("./assets/image/sprites_shadow_green1.png");
 	opacity: 1;
-	z-index: 89;
+	z-index: 75;
 }
 
 #arena[data-shadow-style="off"]>.player.selectable:not(.selected):not(.target)::before {
 	animation-duration: 0.9s;
-	background-image: url("assets/image/sprites_shadow_red.png");
+	background-image: url("./assets/image/sprites_shadow_lvse.png");
 	opacity: 1;
-	z-index: 89;
+	z-index: 79;
 	top: -38.4px;
 	left: -55px;
 }
@@ -99,7 +106,7 @@
 	width: 228px;
 	height: 228px;
 	opacity: 0;
-	background-image: url("assets/image/sprites_shadow_green.png");
+	background-image: url("./assets/image/sprites_shadow_lvse.png");
 	background-repeat: no-repeat;
 	animation-name: kf-sprites-glow;
 	animation-duration: 0s;
@@ -112,9 +119,34 @@
 	transition: opacity 0.1s linear;
 }
 
-#arena[data-shadow-style="off"]>.player.target:not(.glow_phase):not(.selectable):not(.selected)::after {
+#arena[data-shadow-style="off"]>.player.selectable:not(.selected):not(.target):not(*[data-position="0"])::before {
 	animation-duration: 0.9s;
+	background-image: url("./assets/image/sprites_shadow_red.png");
 	opacity: 1;
+	z-index: 89;
+	top: -38.4px;
+	left: -55px;
+}
+
+#arena[data-shadow-style="off"]>.player:not(*[data-position="0"])::after,
+#arena[data-shadow-style="off"]>.player.selected:not(*[data-position="0"])::after,
+#arena[data-shadow-style="off"]>.player.selectable:not(*[data-position="0"])::after {
+	left: -55px;
+	top: -40px;
+	width: 228px;
+	height: 228px;
+	opacity: 0;
+	background-image: url("./assets/image/sprites_shadow_red.png");
+	background-repeat: no-repeat;
+	animation-name: kf-sprites-glow;
+	animation-duration: 0s;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-fill-mode: forwards;
+	animation-timing-function: steps(1);
+	pointer-events: none;
+	box-shadow: none;
+	transition: opacity 0.1s linear;
 }
 
 /*-----------------分割线-----------------*/
