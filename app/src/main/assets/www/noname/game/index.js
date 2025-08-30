@@ -4702,7 +4702,34 @@ export class Game extends GameCompatible {
 	 * @returns
 	 */
 	addVideo(type, player, content) {
-		if (_status.video || game.online) {
+		// if (_status.video || game.online) {//非房主game.online联机游戏时会为true
+		// 	return;
+		// }
+		//todo
+		if(game.online){	//非房主记录
+			if(lib.video?.length==0&&content!=null&&content.length!=null
+				&&content.length>0&&content[0]==="跋扈"){
+				console.log('lib.video?.length===',lib.video?.length)
+				//console.log(game);
+				//console.log(game.players);
+				let content=[];
+				let players=game.players;
+				for (let i = 0; i < players.length; i++) {
+					content.push({
+						name: players[i].name,
+						identity: players[i].identity,
+						nickname: players[i].nickname,
+					});
+				}
+				let initTypeObj={
+						type: "init",
+						player: null,
+						content: content,
+						delay: 0,
+					}
+				//console.log(initTypeObj);
+				lib.video.push(initTypeObj);
+			}
 			return;
 		}
 		if (!_status.videoInited) {
@@ -6224,9 +6251,175 @@ export class Game extends GameCompatible {
 	 * @returns
 	 */
 	over(result, bool) {
-		if (_status.over) {
-			return;
+		console.log('结束方法=========');
+		// console.log('game.getVideoName()=',game.getVideoName());
+		// if (_status.over) {
+		// 	return;
+		// }
+		//todo
+		if(game.online){	//房主game.onlineroom为true，非房主game.online为true
+			console.log('联机模式，非房主进入这里')
+			//console.log('arguments[1]===',arguments[1]);//应该是输赢的布尔值
+			//console.log(bool);//这个好像和arguments[1]是相等的
+
+			//arr1是房主房间的libVideo，arr2是当前非房主的libVideo
+			function generateIndexMap(arr1, arr2) {		//生成映射关系map
+				// 辅助函数：从数组中查找 type 为 'init' 的对象（仅有一个）
+				const findInitObject = (arr) => {
+					const initObj = arr.find(item => item.type === 'init');
+					if (!initObj) {
+						throw new Error('数组中未找到 type 为 "init" 的对象');
+					}
+					return initObj;
+				};
+
+				// 从两个输入数组中找到对应的 init 对象
+				const sourceInit = findInitObject(arr1); // 第一个数组中的 init 对象
+				const targetInit = findInitObject(arr2); // 第二个数组中的 init 对象
+
+				// 提取两个 content 数组的 name 列表
+				const sourceNames = sourceInit.content.map(item => item.name);
+				const targetNames = targetInit.content.map(item => item.name);
+
+				// 生成下标映射（原下标 -> 目标下标）
+				const map = {};
+				for (let i = 0; i < sourceNames.length; i++) {
+					const sourceName = sourceNames[i];
+					const targetIndex = targetNames.indexOf(sourceName);
+
+					if (targetIndex === -1) {
+						throw new Error(`源 content 中的名称 "${sourceName}" 在目标 content 中不存在`);
+					}
+
+					// 下标转换为字符串（如 "0" : "2"）
+					map[i.toString()] = targetIndex.toString();
+				}
+
+				return map;
+			}
+
+			function fixLibVideo(map,originLibVideo){
+				// 工具函数：根据 map 映射值（无匹配时保留原值）
+				let getMappedValue = (originalValue) => {
+					return typeof originalValue === "string" ? (map[originalValue] ?? originalValue) : originalValue;
+				};
+
+				// 处理后的数组
+				let processedArray = originLibVideo.map(obj => {
+					// 1. 统一处理 player 属性（所有类型对象）
+					let newPlayer = getMappedValue(obj.player);
+
+					// 2. 初始化新对象（复制原对象所有属性）
+					let newObj = { ...obj, player: newPlayer };
+
+					// 3. 条件处理：仅 type 为 line 时，处理 content 数组的第一个元素
+					if (obj.type === "line") {
+						// 校验 content 是有效数组且长度 > 0
+						if (Array.isArray(newObj.content) && newObj.content.length > 0) {
+							let originalFirstItem = newObj.content[0];
+							// 仅当第一个元素是字符串时尝试映射（根据需求调整类型判断）
+							let newFirstItem = getMappedValue(originalFirstItem);
+							// 生成新的 content 数组（保留后续元素）
+							newObj.content = [newFirstItem, ...newObj.content.slice(1)];
+						}
+					}
+						
+					// 4. 条件处理：type 为 init 时，重新排序 content 数组
+					if (obj.type === "init") {
+						const originalContent = newObj.content;
+						// content 长度与 map 键数量一致，无需多余判断
+						const newContent = [];
+						for (let i = 0; i < originalContent.length; i++) {
+							const targetIndex = Number(map[i.toString()]); // 将 map 键（字符串）转为数字索引
+							newContent[targetIndex] = originalContent[i]; // 按映射放入目标位置
+						}
+						newObj.content = newContent; // 覆盖为排序后的数组
+					}
+
+					return newObj;
+				});
+
+				//console.log(processedArray);
+				return processedArray;
+			}
+			// console.log(_status);
+			// console.log(game);
+			// console.log(lib);
+			let store = lib.db.transaction(["video"], "readwrite").objectStore("video");
+			let videos = lib.videos.slice(0);
+			for (let i = 0; i < videos.length; i++) {
+				if (videos[i].starred) {
+					videos.splice(i--, 1);
+				}
+			}
+			for (let deletei = 0; deletei < 5; deletei++) {
+				if (videos.length >= 20) {
+					let toremove = videos.pop();
+					lib.videos.remove(toremove);
+					store.delete(toremove.time);
+				} else {
+					break;
+				}
+			}
+			let me = game.me || game.players[0];
+			if (!me) {
+				return;
+			}
+			// 定义映射关系0:2,1:0,2:1
+			// let map = { "0": "2", "1": "0", "2": "1" };
+			//自动生成映射关系
+			let map = generateIndexMap(result.libVideo,lib.video);
+			console.log('映射关系为====',map);
+			let resultLibVideo=fixLibVideo(map,result.libVideo)
+			let newvid = {
+				name: 'video',
+				mode: lib.configOL.mode,
+				video: resultLibVideo,
+				win: arguments[1],
+				name1: me.name1 || me.name,
+				name2: me.name2,
+				time: lib.getUTC(new Date()),
+			};
+			let modecharacters = lib.characterPack["mode_" + get.mode()];
+			if (modecharacters) {
+				if (get.mode() == "guozhan") {
+					if (modecharacters[newvid.name1]) {
+						if (newvid.name1.startsWith("gz_shibing")) {
+							newvid.name1 = newvid.name1.slice(3, 11);
+						} else {
+							newvid.name1 = newvid.name1.slice(3);
+						}
+					}
+					if (modecharacters[newvid.name2]) {
+						if (newvid.name2.startsWith("gz_shibing")) {
+							newvid.name2 = newvid.name2.slice(3, 11);
+						} else {
+							newvid.name2 = newvid.name2.slice(3);
+						}
+					}
+				} else {
+					if (modecharacters[newvid.name1]) {
+						newvid.name1 = get.mode() + "::" + newvid.name1;
+					}
+					if (modecharacters[newvid.name2]) {
+						newvid.name2 = get.mode() + "::" + newvid.name2;
+					}
+				}
+			}
+			if (newvid.name1 && newvid.name1.startsWith("subplayer_")) {
+				newvid.name1 = newvid.name1.slice(10, newvid.name1.lastIndexOf("_"));
+			}
+			if (newvid.name2 && newvid.name2.startsWith("subplayer_")) {
+				newvid.name1 = newvid.name2.slice(10, newvid.name1.lastIndexOf("_"));
+			}
+			// lib.videos.unshift(newvid);//非房主不用这句插入到第一位，不刷新页面会看到多一条记录
+			// 清洗代理对象
+			newvid.video = structuredClone(newvid.video);
+			store.put(newvid);
+			// ui.create.videoNode(newvid, true);
+			console.log('记录完成')
 		}
+		
 		if (game.me._trueMe) {
 			game.swapPlayer(game.me._trueMe);
 		}
@@ -6247,10 +6440,11 @@ export class Game extends GameCompatible {
 				ui.historybar.style.borderRadius = "0 0 0 4px";
 			}
 		}
+		//console.log('game.online===',game.online);//非房主game.online为true
 		if (game.online) {
 			let dialog = ui.create.dialog();
 			dialog.noforcebutton = true;
-			dialog.content.innerHTML = result;
+			dialog.content.innerHTML = result.dialogContent;
 			dialog.forcebutton = true;
 			let result2 = arguments[1];
 			if (result2 == true) {
@@ -6319,6 +6513,7 @@ export class Game extends GameCompatible {
 			}
 			return;
 		}
+		//console.log('房主才能执行到这里');
 		if (lib.config.background_audio) {
 			if (result === true) {
 				game.playAudio("effect", "win");
@@ -6680,8 +6875,21 @@ export class Game extends GameCompatible {
 
 		let clients = game.players.concat(game.dead);
 		for (let i = 0; i < clients.length; i++) {
-			if (clients[i].isOnline2()) {
-				clients[i].send(game.over, dialog.content.innerHTML, game.checkOnlineResult(clients[i]));
+			// if (clients[i].isOnline2()) {
+			// 	clients[i].send(game.over, dialog.content.innerHTML, game.checkOnlineResult(clients[i]));
+			// }
+			if (clients[i].nickname!=null) {
+				let olCheckResult=game.checkOnlineResult(clients[i]);
+				// console.log('olcheckResult',olCheckResult);
+				// console.log('game.me==player????',clients[i]==game.me)
+				if(clients[i]!=game.me){//房主将游戏结束告诉其它非玩家
+					console.log('房主将游戏结束告诉其它非玩家')
+					let sendResult={};
+					sendResult.dialogContent=dialog.content.innerHTML;
+					sendResult.libVideo=lib.video;
+					clients[i].send(game.over, sendResult, olCheckResult);
+				}
+				
 			}
 		}
 
@@ -6777,6 +6985,7 @@ export class Game extends GameCompatible {
 			newvid.video = structuredClone(newvid.video);
 			store.put(newvid);
 			ui.create.videoNode(newvid, true);
+			console.log('录像记录完成')
 		}
 		// _status.auto=false;
 		if (ui.auto) {
@@ -6814,7 +7023,8 @@ export class Game extends GameCompatible {
 						break;
 				}
 			}
-			setTimeout(game.reload, 500);
+			console.log('setTimeout(game.reload, 500)')
+			// setTimeout(game.reload, 500);//斗地主房主也不会执行到这里
 		}
 		if (game.controlOver) {
 			game.controlOver();
@@ -6866,6 +7076,7 @@ export class Game extends GameCompatible {
 						}
 					});
 					game.saveConfig("tmp_owner_roomId", game.roomId);
+					console.log('结束后，房主点击了重新开始按钮')
 					setTimeout(game.reload, 100);
 				});
 			} else {
@@ -6894,9 +7105,11 @@ export class Game extends GameCompatible {
 		if (window.isNonameServer) {
 			lib.configOL.gameStarted = false;
 			game.saveConfig("pagecfg" + window.isNonameServer, [lib.configOL, game.roomId, _status.onlinenickname, _status.onlineavatar]);
+			console.log('window.isNonameServer&&game.reload=====')
 			game.reload();
 		} else if (_status.connectMode && !game.online) {
-			setTimeout(game.reload, 15000);
+			console.log('注释以下代码防止对局结束后房主自动刷新')
+			//setTimeout(game.reload, 15000);//房主执行，实际等待只有3秒左右，并没有15秒
 		}
 	}
 	/**
