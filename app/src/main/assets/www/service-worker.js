@@ -83,6 +83,25 @@ self.addEventListener("fetch", event => {
 		event.respondWith(rep);
 		return;
 	}
+	
+	if (url.pathname.endsWith("/assets/animation/effect_zhulutianxia.png")) {
+		console.log("=====资源已加载完成=====")
+		//console.log(self.decadeUI.config.newDecadeStyle)//主线程才能访问，serviceWorker线程访问不了
+		// 发送消息到主线程（在响应前或响应后均可）
+		self.clients.matchAll().then(clients => {
+			clients.forEach(client => {
+				client.postMessage({
+					type: "loadFinish",
+					details: {
+						url: request.url,
+						method: request.method,
+						timestamp: Date.now()
+					}
+				});
+			});
+		});
+	}
+
 	if (!['.ts', '.json', '.vue', 'css', '.js'].some(ext => url.pathname.endsWith(ext)) && !request.url.replace(location.origin, '').startsWith('/noname-builtinModules/')) {
 		return;
 	}
