@@ -5370,6 +5370,9 @@ else if (entry[1] !== void 0) stringifying[key] = JSON.stringify(entry[1]);*/
 					} else {
 						banned.push(name);
 					}
+					console.log('卡牌点击全部禁用')
+					console.log(this.bannedname);
+					console.log(banned);
 					game.saveConfig(this.bannedname, banned);
 					this.classList.toggle("on");
 					if (node.updateBanned) {
@@ -5573,6 +5576,9 @@ else if (entry[1] !== void 0) stringifying[key] = JSON.stringify(entry[1]);*/
 					} else {
 						banned.push(character);
 					}
+					console.log('武将点击全部禁用')
+					console.log(this.bannedname);
+					console.log(banned);
 					game.saveConfig(this.bannedname, banned);
 					this.classList.toggle("on");
 					if (node.updateBanned) {
