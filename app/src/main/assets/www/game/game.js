@@ -159,11 +159,38 @@
 			if (!findServiceWorker) {
 				location.reload();
 			}
-			// 接收消息，暂时没用到
+			// 接收消息
 			navigator.serviceWorker.addEventListener("message", e => {
 				if (e.data?.type === "reload") {
 					window.location.reload();
 				}
+				//当且仅当初次加载时执行，自动刷新掉默认的十周年UI界面变为设置的手杀样式
+				if (e.data?.type === "loadFinish") {
+					let extensionStyle=window.decadeUI?.config?.newDecadeStyle;
+					//console.log('extensionStyle=',extensionStyle);
+					if(extensionStyle==null){
+						window.game.saveConfig('identity_bannedcards',['muniu'])
+						window.game.saveConfig('guozhan_bannedcards',['muniu'])
+						window.game.saveConfig('versus_bannedcards',['muniu'])
+						window.game.saveConfig('boss_bannedcards',['muniu'])
+						window.game.saveConfig('doudizhu_bannedcards',['muniu'])
+						window.game.saveConfig('single_bannedcards',['muniu'])
+						window.game.saveConfig('chess_bannedcards',['muniu'])
+						window.game.saveConfig('tafang_bannedcards',['muniu'])
+						window.game.saveConfig('connect_identity_bannedcards',['muniu'])
+						window.game.saveConfig('connect_guozhan_bannedcards',['muniu'])
+						window.game.saveConfig('connect_versus_bannedcards',['muniu'])
+						window.game.saveConfig('connect_doudizhu_bannedcards',['muniu'])
+						window.game.saveConfig('connect_single_bannedcards',['muniu'])
+						
+						setTimeout(() => {
+							window.location.reload();
+						}, 1000);
+					}
+				}
+				// if(e.data?.type==="useXianDingJi"||e.data?.type==="userJueXingJi"){
+				// 	console.log('接收到消息：'+e.data?.type);
+				// }
 			});
 			// 发送消息
 			// navigator.serviceWorker.controller.postMessage({ action: "reload" });
