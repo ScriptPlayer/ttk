@@ -187,7 +187,26 @@ decadeModule.import(function (lib, game, ui, get, ai, _status) {
 		},
 
 		skill(player, skillName, vice) {
+			//目前这些没超模的武将，应该只有觉醒技和限定技能能进该方法
+			//console.log('skill=====发动=======',player);
 			if (get.itemtype(player) != "player") return console.error("player");
+			//console.log(skillName);//自立
+			//console.log(vice);//main
+			//console.log(game.online);//非房主为true;单机false;房主false
+			//console.log(player);
+			if(game.online){
+				let skillMarks=player.getElementsByClassName('skillMarks')[0];
+				let skillMarkItem=skillMarks.firstChild;
+				if(skillMarkItem){
+					//console.log('是限定技===');
+					skillMarkItem.classList.add('used');
+					skillMarkItem.dataset.bugfix="1";
+				}else{
+					//觉醒技
+					//console.log('是觉醒技===');
+					skillMarks.innerHTML=`<div class="skillMarkItem juexingji" data-bugfix="1">${skillName}</div>`
+				}
+			}
 
 			var animation = decadeUI.animation;
 			var asset = animation.spine.assets["effect_xianding"];

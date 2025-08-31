@@ -514,10 +514,16 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				node = player.node.xSkillMarks = ui.create.div(".skillMarks", player);
 			}
 
+			//console.log('skills1=',skills1)//{}
+			//console.log('skills2=',skills2)//{xinzili: false}
+			//console.log('node.childNodes=',node.childNodes);//NodeList [div.skillMarkItem.juexingji]
 			Array.from(node.childNodes).forEach(function (item) {
 				if (skills1.hasOwnProperty(item.dataset.id)) return;
 				if (skills2[item.dataset.id]) return;
-				item.remove();
+				//console.log("itme.remove()&&item.dataset.bugfix=",item?.dataset?.bugfix);
+				if(item?.dataset?.bugfix!='1'){//不处理自己修改bug时创建的元素(现在是觉醒技标识)
+					item.remove();
+				}
 			});
 			//这里修改3{这里是使限定技和转换技显示不同的样式
 			for (var k in skills1) {
@@ -555,13 +561,25 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 						//如果是转换技就调用转换技标记并设置背景图
 					}
 				}
-				if (skills1[k]) item.classList.add("used");
-				else item.classList.remove("used");
+				//console.log('skills1[k]=',skills1[k])
+				if (skills1[k]) {
+					//console.log('main1.js使用了',skills1[k])
+					item.classList.add("used");
+				}
+				else {
+					//console.log('禁止：remove("used")因为bugfix=',item?.dataset?.bugfix)
+					// console.log(game.online);//可以获取到，但是可以用bugfix判断
+					if(item?.dataset?.bugfix!='1'){//不处理自己修改bug时创建的元素(现在是觉醒技标识)
+						item.classList.remove("used");
+					}
+					//item.classList.remove("used");
+				}
 				item.dataset.id = k;
 			}
 			//这里结束3}
 			Array.from(node.querySelectorAll(".juexingji")).forEach(function (item) {
-				if (!skills2[item.dataset.id]) {
+				//console.log("这里结束3&&bugfix=",item?.dataset?.bugfix);
+				if (!skills2[item.dataset.id]&&item?.dataset?.bugfix!='1') {
 					item.remove();
 				}
 			});
@@ -573,7 +591,10 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				var item;
 				if (info.dutySkill) {
 					item = ui.create.div(".skillMarkItem.duty", node, get.skillTranslation(k, player));
-				} else item = ui.create.div(".skillMarkItem.juexingji", node, get.skillTranslation(k, player));
+				} else {
+					//console.log('juexingji===');
+					item = ui.create.div(".skillMarkItem.juexingji", node, get.skillTranslation(k, player));
+				}
 				item.dataset.id = k;
 			}
 			//这里结束4}
