@@ -535,6 +535,15 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 						}
 
 						item.addEventListener(lib.config.touchscreen ? "touchend" : "click", function (e) {
+							if(_status.event?.skill==null){
+								item.innerHTML = "<img style=width:70px height:15px src=" 
+								+ lib.assetURL 
+								+ "extension/十周年UI/shoushaUI/lbtn/images/uibutton/QX.png>";
+							}else{
+								item.innerHTML = "<img style=width:70px height:15px src=" + lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/CZ.png>";
+							}
+							//console.log("点击了重铸",_status.event?.skill);
+							if (_status.event?.skill === "_recasting") return;
 							e.stopPropagation();
 							ui.click.skill(this.link);
 						});
