@@ -4288,10 +4288,10 @@ player.removeVirtualEquip(card);
 				// if(typeof content.content === 'object'){
 				// 	console.log("是对象==============");
 				// }
-				if(typeof content.content === 'object' &&content.content.eventInfo!=null){
-					console.log("是对象==============");
-					let contentStr=content.content.eventInfo;
-					game.videoContent['log'](contentStr);
+				if(typeof content.content === 'object' &&content.type==='cardInfo'){
+					//console.log("是cardInfo==============");
+					//let contentStr=content.content.eventInfo;
+					// game.videoContent['log'](contentStr);
 				}else{
 					game.videoContent[content.type](content.content);
 				}
