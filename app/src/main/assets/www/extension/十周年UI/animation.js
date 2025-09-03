@@ -1563,8 +1563,7 @@ if (decadeModule)
 					follow: true
 				},
 				{
-					name: "effect_wuxiekeji",
-					follow: true
+					name: "effect_wuxiekeji"
 				},
 				{
 					name: "effect_wugufengdeng",
@@ -1818,6 +1817,22 @@ if (decadeModule)
 							scale: 0.6,
 							y: [0, 0.4],
 						},
+						//不在这里加，则非房主看不到动画
+						wuxie:{
+							card: "wuxie",
+							name: "effect_wuxiekeji",
+							scale: 0.9
+						},
+						// shan: {
+						// 	card: "shan",
+						// 	name: "effect_shan",
+						// 	scale: 0.6,
+						// },
+//						sha: {
+//							card: "sha",
+//							name: "effect_heisha",
+//							scale: 0.6,
+//						},
 						wanjian: {
 							card: "wanjian",
 							name: "effect_wanjianqifa_full",
@@ -1831,6 +1846,8 @@ if (decadeModule)
 				};
 
 				var cardAnimate = function(card) {
+					//console.log('card.name',card.name);
+					//console.log('card.nature',card.nature);
 					var anim = defines.card[card.name];
 					if (!anim) return console.error("cardAnimate:" + card.name);
 					animation.playSpine(anim.name, {

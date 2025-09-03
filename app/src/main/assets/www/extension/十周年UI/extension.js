@@ -1859,10 +1859,12 @@ export default async function () {
 															decadeUI.animation.cap.playSpineTo(card, "effect_wuzhongshengyou");
 															break;
 														case "wuxie":
-															decadeUI.animation.cap.playSpineTo(card, "effect_wuxiekeji", {
-																y: [10, 0.5],
-																scale: 0.9,
-															});
+															decadeUI.animation.playSpine({name: "effect_wuxiekeji"},{scale:0.9});
+															game.playAudio("../extension", decadeUI.extensionName, "audio/effect_wuxiekeji.mp3");
+															// decadeUI.animation.cap.playSpineTo(card, "effect_wuxiekeji", {
+															// 	y: [10, 0.5],
+															// 	scale: 0.9,
+															// });
 															break;
 														case "juedou":
 															decadeUI.animation.cap.playSpineTo(card, "SF_eff_jiangling_juedou", {
@@ -5160,7 +5162,7 @@ export default async function () {
 												name: "diankuangtulu"
 											},
 											{
-												scale: 0.7,
+												scale: 0.5,
 											}
 										);
 										game.playAudio("../extension", decadeUI.extensionName, "audio/diankuangtulu.mp3");
