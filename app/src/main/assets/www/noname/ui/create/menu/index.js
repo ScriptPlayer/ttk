@@ -461,7 +461,7 @@ export function menu(connectMenu) {
 				clickContainer.call(cacheMenuContainer, connectMenu);
 			}
 		};
-		menux = createMenu(connectMenu, ["开始", "选项", "武将", "卡牌", "扩展", "其它"], {
+		menux = createMenu(connectMenu, ["开始", "选项", "武将", "录像", "其它"], {
 			position: cacheMenuContainer,
 			bar: 40,
 		});
@@ -518,12 +518,12 @@ export function menu(connectMenu) {
 	let updateCharacterPackMenu = ui.create.characterPackMenu(connectMenu);
 	ui.updateCharacterPackMenu.push(updateCharacterPackMenu);
 
-	// 卡牌
-	let updatecardPackMenu = ui.create.cardPackMenu(connectMenu);
-	ui.updateCardPackMenu.push(updatecardPackMenu);
+	// // 卡牌
+	// let updatecardPackMenu = ui.create.cardPackMenu(connectMenu);
+	// ui.updateCardPackMenu.push(updatecardPackMenu);
 
-	// 扩展
-	ui.create.extensionMenu(connectMenu);
+	// // 扩展
+	// ui.create.extensionMenu(connectMenu);
 
 	// 其他
 	ui.create.otherMenu(connectMenu);

@@ -71,16 +71,16 @@ window.noname_package = {
 	},
 	mode: {
 		identity: "身份",
-		guozhan: "国战",
+		// guozhan: "国战",
 		versus: "对决",
 		connect: "联机",
 		boss: "挑战",
 		doudizhu: "斗地主",
 		single: "单挑",
-		chess: "战棋",
-		tafang: "塔防",
+		// chess: "战棋",
+		// tafang: "塔防",
 		// stone: "炉石",
-		brawl: "乱斗",
+		// brawl: "乱斗",
 	},
 	submode: {
 		identity: {

@@ -5007,313 +5007,313 @@ export class Library {
 		},
 	};
 	extensionMenu = {
-		cardpile: {
-			enable: {
-				name: "开启",
-				init: false,
-				restart: true,
-			},
-			intro: {
-				name: "将杀闪等牌在牌堆中的比例维持在与军争牌堆相同，防止开启扩展包后被过多地稀释",
-				clear: true,
-				nopointer: true,
-			},
-			sha: {
-				name: "杀",
-				init: "1",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			huosha: {
-				name: "火杀",
-				init: "1",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			leisha: {
-				name: "雷杀",
-				init: "1",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			shan: {
-				name: "闪",
-				init: "1",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			tao: {
-				name: "桃",
-				init: "0",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			jiu: {
-				name: "酒",
-				init: "0",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			wuxie: {
-				name: "无懈可击",
-				init: "0.5",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			nanman: {
-				name: "南蛮入侵",
-				init: "0",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			wanjian: {
-				name: "万箭齐发",
-				init: "0",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			guohe: {
-				name: "过河拆桥",
-				init: "0",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			shunshou: {
-				name: "顺手牵羊",
-				init: "0",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			tiesuo: {
-				name: "铁索连环",
-				init: "0",
-				item: {
-					1: "补充全部",
-					0.5: "补充一半",
-					0: "不补充",
-				},
-			},
-			hide: {
-				name: "隐藏此扩展",
-				clear: true,
-				onclick() {
-					if (this.firstChild.innerHTML == "隐藏此扩展") {
-						this.firstChild.innerHTML = "此扩展将在重启后隐藏";
-						lib.config.hiddenPlayPack.add("cardpile");
-						if (!lib.config.prompt_hidepack) {
-							alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
-							game.saveConfig("prompt_hidepack", true);
-						}
-					} else {
-						this.firstChild.innerHTML = "隐藏此扩展";
-						lib.config.hiddenPlayPack.remove("cardpile");
-					}
-					game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
-				},
-			},
-		},
-		boss: {
-			enable: {
-				name: "开启",
-				init: false,
-				restart: true,
-				onswitch: function (bool) {
-					if (bool) {
-						var storage = { boss: {}, versus: {}, translate: {} };
-						var loadversus = function () {
-							game.loadModeAsync("versus", function (mode) {
-								for (var i in mode.translate) {
-									storage.translate[i] = mode.translate[i];
-								}
-								for (var i in mode.jiangeboss) {
-									if (mode.jiangeboss[i].isBossAllowed) {
-										storage.versus[i] = mode.jiangeboss[i];
-									}
-								}
-								localStorage.setItem("boss_storage_playpackconfig", JSON.stringify(storage));
-							});
-						};
-						game.loadModeAsync("boss", function (mode) {
-							for (var i in mode.translate) {
-								storage.translate[i] = mode.translate[i];
-							}
-							for (var i in mode.characterPack.mode_boss) {
-								if (mode.characterPack.mode_boss[i].isBossAllowed) {
-									storage.boss[i] = mode.characterPack.mode_boss[i];
-								}
-							}
-							loadversus();
-						});
-					} else {
-						localStorage.removeItem("boss_storage_playpackconfig");
-					}
-				},
-			},
-			intro: {
-				name: "将剑阁和挑战模式的武将添加到其它模式",
-				clear: true,
-				nopointer: true,
-			},
-			enableai: {
-				name: "随机选将可用",
-				init: false,
-			},
-			hide: {
-				name: "隐藏此扩展",
-				clear: true,
-				onclick() {
-					if (this.firstChild.innerHTML == "隐藏此扩展") {
-						this.firstChild.innerHTML = "此扩展将在重启后隐藏";
-						lib.config.hiddenPlayPack.add("boss");
-						if (!lib.config.prompt_hidepack) {
-							alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
-							game.saveConfig("prompt_hidepack", true);
-						}
-					} else {
-						this.firstChild.innerHTML = "隐藏此扩展";
-						lib.config.hiddenPlayPack.remove("boss");
-					}
-					game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
-				},
-			},
-		},
-		wuxing: {
-			enable: {
-				name: "开启",
-				init: false,
-				restart: true,
-			},
-			intro: {
-				name: "每名角色和部分卡牌在游戏开始时随机获得一个属性",
-				clear: true,
-				nopointer: true,
-			},
-			num: {
-				name: "带属性卡牌",
-				init: "0.3",
-				item: {
-					0.1: "10%",
-					0.2: "20%",
-					0.3: "30%",
-					0.5: "50%",
-				},
-			},
-			hide: {
-				name: "隐藏此扩展",
-				clear: true,
-				onclick() {
-					if (this.firstChild.innerHTML == "隐藏此扩展") {
-						this.firstChild.innerHTML = "此扩展将在重启后隐藏";
-						lib.config.hiddenPlayPack.add("wuxing");
-						if (!lib.config.prompt_hidepack) {
-							alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
-							game.saveConfig("prompt_hidepack", true);
-						}
-					} else {
-						this.firstChild.innerHTML = "隐藏此扩展";
-						lib.config.hiddenPlayPack.remove("wuxing");
-					}
-					game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
-				},
-			},
-		},
-		coin: {
-			enable: {
-				name: "开启",
-				init: false,
-				restart: true,
-				onclick(bool) {
-					if (bool) {
-						lib.config.plays.add("coin");
-					} else {
-						lib.config.plays.remove("coin");
-					}
-					game.saveConfig("plays", lib.config.plays);
-				},
-			},
-			intro: {
-				name: "每完成一次对局，可获得一定数量的金币；金币可用于购买游戏特效",
-				clear: true,
-				nopointer: true,
-			},
-			display: {
-				name: "金币显示",
-				init: "text",
-				item: {
-					symbol: "符号",
-					text: "文字",
-				},
-				onclick(item) {
-					game.saveConfig("coin_display_playpackconfig", item);
-					if (game.changeCoin) {
-						game.changeCoin(0);
-					}
-				},
-			},
-			canvas: {
-				name: "特效置顶",
-				init: false,
-				onclick(bool) {
-					game.saveConfig("coin_canvas_playpackconfig", bool);
-					if (bool) {
-						ui.window.classList.add("canvas_top");
-					} else {
-						ui.window.classList.remove("canvas_top");
-					}
-				},
-			},
-			hide: {
-				name: "隐藏此扩展",
-				clear: true,
-				onclick() {
-					if (this.firstChild.innerHTML == "隐藏此扩展") {
-						this.firstChild.innerHTML = "此扩展将在重启后隐藏";
-						lib.config.hiddenPlayPack.add("coin");
-						if (!lib.config.prompt_hidepack) {
-							alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
-							game.saveConfig("prompt_hidepack", true);
-						}
-					} else {
-						this.firstChild.innerHTML = "隐藏此扩展";
-						lib.config.hiddenPlayPack.remove("coin");
-					}
-					game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
-				},
-			},
-		},
+		// cardpile: {
+		// 	enable: {
+		// 		name: "开启",
+		// 		init: false,
+		// 		restart: true,
+		// 	},
+		// 	intro: {
+		// 		name: "将杀闪等牌在牌堆中的比例维持在与军争牌堆相同，防止开启扩展包后被过多地稀释",
+		// 		clear: true,
+		// 		nopointer: true,
+		// 	},
+		// 	sha: {
+		// 		name: "杀",
+		// 		init: "1",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	huosha: {
+		// 		name: "火杀",
+		// 		init: "1",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	leisha: {
+		// 		name: "雷杀",
+		// 		init: "1",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	shan: {
+		// 		name: "闪",
+		// 		init: "1",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	tao: {
+		// 		name: "桃",
+		// 		init: "0",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	jiu: {
+		// 		name: "酒",
+		// 		init: "0",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	wuxie: {
+		// 		name: "无懈可击",
+		// 		init: "0.5",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	nanman: {
+		// 		name: "南蛮入侵",
+		// 		init: "0",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	wanjian: {
+		// 		name: "万箭齐发",
+		// 		init: "0",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	guohe: {
+		// 		name: "过河拆桥",
+		// 		init: "0",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	shunshou: {
+		// 		name: "顺手牵羊",
+		// 		init: "0",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	tiesuo: {
+		// 		name: "铁索连环",
+		// 		init: "0",
+		// 		item: {
+		// 			1: "补充全部",
+		// 			0.5: "补充一半",
+		// 			0: "不补充",
+		// 		},
+		// 	},
+		// 	hide: {
+		// 		name: "隐藏此扩展",
+		// 		clear: true,
+		// 		onclick() {
+		// 			if (this.firstChild.innerHTML == "隐藏此扩展") {
+		// 				this.firstChild.innerHTML = "此扩展将在重启后隐藏";
+		// 				lib.config.hiddenPlayPack.add("cardpile");
+		// 				if (!lib.config.prompt_hidepack) {
+		// 					alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
+		// 					game.saveConfig("prompt_hidepack", true);
+		// 				}
+		// 			} else {
+		// 				this.firstChild.innerHTML = "隐藏此扩展";
+		// 				lib.config.hiddenPlayPack.remove("cardpile");
+		// 			}
+		// 			game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
+		// 		},
+		// 	},
+		// },
+		// boss: {
+		// 	enable: {
+		// 		name: "开启",
+		// 		init: false,
+		// 		restart: true,
+		// 		onswitch: function (bool) {
+		// 			if (bool) {
+		// 				var storage = { boss: {}, versus: {}, translate: {} };
+		// 				var loadversus = function () {
+		// 					game.loadModeAsync("versus", function (mode) {
+		// 						for (var i in mode.translate) {
+		// 							storage.translate[i] = mode.translate[i];
+		// 						}
+		// 						for (var i in mode.jiangeboss) {
+		// 							if (mode.jiangeboss[i].isBossAllowed) {
+		// 								storage.versus[i] = mode.jiangeboss[i];
+		// 							}
+		// 						}
+		// 						localStorage.setItem("boss_storage_playpackconfig", JSON.stringify(storage));
+		// 					});
+		// 				};
+		// 				game.loadModeAsync("boss", function (mode) {
+		// 					for (var i in mode.translate) {
+		// 						storage.translate[i] = mode.translate[i];
+		// 					}
+		// 					for (var i in mode.characterPack.mode_boss) {
+		// 						if (mode.characterPack.mode_boss[i].isBossAllowed) {
+		// 							storage.boss[i] = mode.characterPack.mode_boss[i];
+		// 						}
+		// 					}
+		// 					loadversus();
+		// 				});
+		// 			} else {
+		// 				localStorage.removeItem("boss_storage_playpackconfig");
+		// 			}
+		// 		},
+		// 	},
+		// 	intro: {
+		// 		name: "将剑阁和挑战模式的武将添加到其它模式",
+		// 		clear: true,
+		// 		nopointer: true,
+		// 	},
+		// 	enableai: {
+		// 		name: "随机选将可用",
+		// 		init: false,
+		// 	},
+		// 	hide: {
+		// 		name: "隐藏此扩展",
+		// 		clear: true,
+		// 		onclick() {
+		// 			if (this.firstChild.innerHTML == "隐藏此扩展") {
+		// 				this.firstChild.innerHTML = "此扩展将在重启后隐藏";
+		// 				lib.config.hiddenPlayPack.add("boss");
+		// 				if (!lib.config.prompt_hidepack) {
+		// 					alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
+		// 					game.saveConfig("prompt_hidepack", true);
+		// 				}
+		// 			} else {
+		// 				this.firstChild.innerHTML = "隐藏此扩展";
+		// 				lib.config.hiddenPlayPack.remove("boss");
+		// 			}
+		// 			game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
+		// 		},
+		// 	},
+		// },
+		// wuxing: {
+		// 	enable: {
+		// 		name: "开启",
+		// 		init: false,
+		// 		restart: true,
+		// 	},
+		// 	intro: {
+		// 		name: "每名角色和部分卡牌在游戏开始时随机获得一个属性",
+		// 		clear: true,
+		// 		nopointer: true,
+		// 	},
+		// 	num: {
+		// 		name: "带属性卡牌",
+		// 		init: "0.3",
+		// 		item: {
+		// 			0.1: "10%",
+		// 			0.2: "20%",
+		// 			0.3: "30%",
+		// 			0.5: "50%",
+		// 		},
+		// 	},
+		// 	hide: {
+		// 		name: "隐藏此扩展",
+		// 		clear: true,
+		// 		onclick() {
+		// 			if (this.firstChild.innerHTML == "隐藏此扩展") {
+		// 				this.firstChild.innerHTML = "此扩展将在重启后隐藏";
+		// 				lib.config.hiddenPlayPack.add("wuxing");
+		// 				if (!lib.config.prompt_hidepack) {
+		// 					alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
+		// 					game.saveConfig("prompt_hidepack", true);
+		// 				}
+		// 			} else {
+		// 				this.firstChild.innerHTML = "隐藏此扩展";
+		// 				lib.config.hiddenPlayPack.remove("wuxing");
+		// 			}
+		// 			game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
+		// 		},
+		// 	},
+		// },
+		// coin: {
+		// 	enable: {
+		// 		name: "开启",
+		// 		init: false,
+		// 		restart: true,
+		// 		onclick(bool) {
+		// 			if (bool) {
+		// 				lib.config.plays.add("coin");
+		// 			} else {
+		// 				lib.config.plays.remove("coin");
+		// 			}
+		// 			game.saveConfig("plays", lib.config.plays);
+		// 		},
+		// 	},
+		// 	intro: {
+		// 		name: "每完成一次对局，可获得一定数量的金币；金币可用于购买游戏特效",
+		// 		clear: true,
+		// 		nopointer: true,
+		// 	},
+		// 	display: {
+		// 		name: "金币显示",
+		// 		init: "text",
+		// 		item: {
+		// 			symbol: "符号",
+		// 			text: "文字",
+		// 		},
+		// 		onclick(item) {
+		// 			game.saveConfig("coin_display_playpackconfig", item);
+		// 			if (game.changeCoin) {
+		// 				game.changeCoin(0);
+		// 			}
+		// 		},
+		// 	},
+		// 	canvas: {
+		// 		name: "特效置顶",
+		// 		init: false,
+		// 		onclick(bool) {
+		// 			game.saveConfig("coin_canvas_playpackconfig", bool);
+		// 			if (bool) {
+		// 				ui.window.classList.add("canvas_top");
+		// 			} else {
+		// 				ui.window.classList.remove("canvas_top");
+		// 			}
+		// 		},
+		// 	},
+		// 	hide: {
+		// 		name: "隐藏此扩展",
+		// 		clear: true,
+		// 		onclick() {
+		// 			if (this.firstChild.innerHTML == "隐藏此扩展") {
+		// 				this.firstChild.innerHTML = "此扩展将在重启后隐藏";
+		// 				lib.config.hiddenPlayPack.add("coin");
+		// 				if (!lib.config.prompt_hidepack) {
+		// 					alert("隐藏的扩展包可通过选项-其它-重置隐藏内容恢复");
+		// 					game.saveConfig("prompt_hidepack", true);
+		// 				}
+		// 			} else {
+		// 				this.firstChild.innerHTML = "隐藏此扩展";
+		// 				lib.config.hiddenPlayPack.remove("coin");
+		// 			}
+		// 			game.saveConfig("hiddenPlayPack", lib.config.hiddenPlayPack);
+		// 		},
+		// 	},
+		// },
 	};
 	mode = {
 		identity: {
@@ -7150,7 +7150,7 @@ export class Library {
 				},
 				hall_button: {
 					name: "联机大厅按钮",
-					init: true,
+					init: false,
 					frequent: true,
 					onclick(bool) {
 						game.saveConfig("hall_button", bool, "connect");
@@ -15160,6 +15160,7 @@ export class Library {
 	linked = ["fire", "thunder", "kami", "ice"];
 	natureBg = new Map([["stab", "image/card/cisha.png"]]);
 	natureSeparator = "|";
+	// obj = "v1";
 	namePrefix = new Map([
 		[
 			"界",

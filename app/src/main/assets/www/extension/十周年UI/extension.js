@@ -11528,7 +11528,7 @@ export default async function () {
 			loadingStyle: {
 				name: '<b><font color="#FF6020">更换光标+loading框',
 				intro: '<b><font color="#FF6020">可以更换局内选项框以及光标',
-				init: "on",
+				init: "othersOn",
 				item: {
 					off: "关闭",
 					on: '<div style="width:60px;height:40px;position:relative;background-image: url(' + lib.assetURL + 'extension/十周年UI/assets/image/dialog2.png);background-size: 100% 100%;"></div>',
