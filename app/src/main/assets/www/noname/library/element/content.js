@@ -7909,11 +7909,20 @@ player.removeVirtualEquip(card);
 					title.style.padding = "0px";
 					hs.randomSort();
 					if (event.visible || target.isUnderControl(true) || player.hasSkillTag("viewHandcard", null, target, true)) {
-						event.dialog.add(hs);
-						directh = false;
+						console.log('choosePlayerCard可以看');
+						//console.log(target);
+						//console.log(player);
+						if(player==target){
+							event.dialog.add(hs);
+							directh = false;
+						}else{
+							event.dialog.add([hs, "blank"]);
+							directh = false;
+						}
 					} else {
 						var shown = hs.filter(card => get.is.shownCard(card));
 						if (shown.length) {
+							console.log('choosePlayerCard可以看2');
 							var hidden = hs.filter(card => !shown.includes(card));
 							var buttons = ui.create.div(".buttons", event.dialog.content);
 							event.dialog.buttons = event.dialog.buttons.concat(ui.create.buttons(shown, "card", buttons));
@@ -7928,6 +7937,7 @@ player.removeVirtualEquip(card);
 							}
 							directh = false;
 						} else {
+							console.log('choosePlayerCard不能看');
 							event.dialog.add([hs, "blank"]);
 						}
 					}
@@ -8095,11 +8105,21 @@ player.removeVirtualEquip(card);
 					title.style.padding = "0px";
 					hs.randomSort();
 					if (event.visible || target.isUnderControl(true) || player.hasSkillTag("viewHandcard", null, target, true)) {
-						event.dialog.add(hs);
-						directh = false;
+						console.log('弃牌可看');
+						//console.log(target);
+						//console.log(player);
+						// event.dialog.add([hs, "blank"]);
+						if(player==target){
+							event.dialog.add(hs);
+							directh = false;
+						}else{
+							event.dialog.add([hs, "blank"]);
+							directh = false;
+						}
 					} else {
 						var shown = hs.filter(card => get.is.shownCard(card));
 						if (shown.length) {
+							console.log('弃牌可看2');
 							var hidden = hs.filter(card => !shown.includes(card));
 							var buttons = ui.create.div(".buttons", event.dialog.content);
 							event.dialog.buttons = event.dialog.buttons.concat(ui.create.buttons(shown, "card", buttons));
@@ -8114,6 +8134,7 @@ player.removeVirtualEquip(card);
 							}
 							directh = false;
 						} else {
+							console.log('弃牌不能看');
 							event.dialog.add([hs, "blank"]);
 						}
 					}
@@ -8306,11 +8327,18 @@ player.removeVirtualEquip(card);
 					title.style.padding = "0px";
 					hs.randomSort();
 					if (event.visible || target.isUnderControl(true) || player.hasSkillTag("viewHandcard", null, target, true)) {
-						event.dialog.add(hs);
-						directh = false;
+						console.log('获取牌，可以看的手牌');
+						if(player==target){
+							event.dialog.add(hs);
+							directh = false;
+						}else{
+							event.dialog.add([hs, "blank"]);
+							directh = false;
+						}
 					} else {
 						var shown = hs.filter(card => get.is.shownCard(card));
 						if (shown.length) {
+							console.log('获取牌，可以看的手牌2');
 							var hidden = hs.filter(card => !shown.includes(card));
 							var buttons = ui.create.div(".buttons", event.dialog.content);
 							event.dialog.buttons = event.dialog.buttons.concat(ui.create.buttons(shown, "card", buttons));
@@ -8325,6 +8353,7 @@ player.removeVirtualEquip(card);
 							}
 							directh = false;
 						} else {
+							console.log('获取牌，不能看的手牌');
 							event.dialog.add([hs, "blank"]);
 						}
 					}
