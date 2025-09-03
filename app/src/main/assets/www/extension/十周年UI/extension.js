@@ -4826,6 +4826,8 @@ export default async function () {
 						event.cards.add(event.card1);
 					};
 
+					//联机禁用chhoseToGuanxing函数
+					if (!_status.connectMode) {
 					lib.element.content.chooseToGuanxing = function () {
 						"step 0";
 						if (player.isUnderControl()) game.modeSwapPlayer(player);
@@ -4985,6 +4987,7 @@ export default async function () {
 						game.logv(player, "将" + get.cnNumber(event.num1) + "张牌置于牌堆顶，" + get.cnNumber(event.num2) + "张牌置于牌堆底");
 						game.updateRoundNumber();
 					};
+					}
 
 					lib.element.player.setIdentity = function (identity) {
 						if (!identity) identity = this.identity;
