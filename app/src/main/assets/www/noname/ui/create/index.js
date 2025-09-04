@@ -2578,9 +2578,10 @@ export class Create {
 			localStorage.setItem("noname_0.9_directstart", true);
 			game.reload();
 		});
-		ui.refreshWebBtn = ui.create.system("刷新", function () {
-			window.location.reload();
-		});
+		//初次启动已经实现自动刷新，不需要再显示刷新按钮
+		// ui.refreshWebBtn = ui.create.system("刷新", function () {
+		// 	window.location.reload();
+		// });
 		ui.lianjiBtn = ui.create.system("联机", function () {
 			game.saveConfig("mode", "connect");
 			localStorage.setItem("noname_0.9_directstart", true);
