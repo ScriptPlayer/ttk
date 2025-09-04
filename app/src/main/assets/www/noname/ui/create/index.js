@@ -3044,10 +3044,13 @@ export class Create {
 					node.classList.add("pressdown");
 				}
 				node.style.transform = 'scale(0.8)'; // 缩小到 80%
+				setTimeout(() => {
+					node.style.transform = 'scale(1)'; // 恢复为 100%
+				}, 100);
 			});
 			node.addEventListener(lib.config.touchscreen ? "touchend" : "mouseup", function (e) {
 				node.classList.remove("pressdown");
-				node.style.transform = 'scale(1)'; // 恢复为 100%
+				// node.style.transform = 'scale(1)'; // 恢复为 100%
 			});
 			node.addEventListener(lib.config.touchscreen ? "touchmove" : "mousemove", function (e) {
 				node.classList.remove("pressdown");
