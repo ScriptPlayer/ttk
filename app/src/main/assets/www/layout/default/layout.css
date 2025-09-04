@@ -1505,7 +1505,7 @@ div:not(.handcards) > .card > .info > span,
 }
 .buttons.smallzoom {
 	display: block;
-	/* zoom: 0.65; */
+	zoom: 0.5;
 }
 .buttons .card.button > .name {
 	transform: scale(0.8);
