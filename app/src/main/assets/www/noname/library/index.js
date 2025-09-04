@@ -4337,7 +4337,7 @@ export class Library {
 				},
 				show_playerids: {
 					name: "显示身份按钮",
-					init: true,
+					init: false,
 					unfrequent: true,
 					onclick(bool) {
 						game.saveConfig("show_playerids", bool);
@@ -4363,7 +4363,7 @@ export class Library {
 				},
 				show_pause: {
 					name: "显示暂停按钮",
-					init: true,
+					init: false,
 					unfrequent: true,
 					onclick(bool) {
 						game.saveConfig("show_pause", bool);
@@ -4376,7 +4376,7 @@ export class Library {
 				},
 				show_auto: {
 					name: "显示托管按钮",
-					init: true,
+					init: false,
 					unfrequent: true,
 					onclick(bool) {
 						game.saveConfig("show_auto", bool);
@@ -4402,7 +4402,7 @@ export class Library {
 				},
 				show_cardpile: {
 					name: "显示牌堆按钮",
-					init: true,
+					init: false,
 					unfrequent: true,
 					onclick(bool) {
 						game.saveConfig("show_cardpile", bool);
@@ -4436,7 +4436,7 @@ export class Library {
 				},
 				show_giveup: {
 					name: "显示投降按钮",
-					init: true,
+					init: false,
 					unfrequent: true,
 					onclick(bool) {
 						game.saveConfig("show_giveup", bool);
@@ -4453,7 +4453,7 @@ export class Library {
 				},
 				show_deckMonitor: {
 					name: "显示记牌器",
-					init: true,
+					init: false,
 					unfrequent: true,
 					onclick(bool) {
 						if (_status.connectMode) {
@@ -4651,7 +4651,7 @@ export class Library {
 				},
 				equip_audio: {
 					name: "装备配音",
-					init: false,
+					init: true,
 				},
 				repeat_audio: {
 					name: "播放重复语音",

@@ -81,6 +81,7 @@ export class Dialog extends HTMLDivElement {
 		if (!lib.config.touchscreen) {
 			dialog.contentContainer.onscroll = ui.update;
 		}
+		//已在扩展重写处修复
 		if (!noTouchScroll) {
 			dialog.contentContainer.ontouchstart = ui.click.dialogtouchStart;
 			dialog.contentContainer.ontouchmove = ui.click.touchScroll;
