@@ -366,6 +366,21 @@ export class Player extends HTMLDivElement {
 	tips;
 
 	/**
+	 * 获取一名角色的名字翻译
+	 * @returns { string }
+	 */
+	getName() {
+		if (this._tempTranslate) {
+			return this._tempTranslate;
+		}
+		const name = this.name;
+		if (lib.translate[name + "_ab"]) {
+			return lib.translate[name + "_ab"];
+		}
+		return get.translation(name);
+	}
+
+	/**
 	 * 玩家（或某张牌）能否响应某个useCard事件的牌，目前仅支持本体部分常用的卡牌，需要添加新卡牌的可以到lib.respondMap按格式添加
 	 * 请注意，该函数只能粗略判断，有些情况是没法判断的
 	 * @param {GameEvent} event 需要判断能否响应的事件，目前只能为useCard或者它的下一级衍生事件，其他全部返回undefined
