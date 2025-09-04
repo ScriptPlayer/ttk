@@ -164,6 +164,14 @@
 				if (e.data?.type === "reload") {
 					window.location.reload();
 				}
+				if (e.data?.type === "jsLoadFinish"&&window.localStorage.getItem('initConfigFinish')==null) {
+					console.log("js加载完成");
+					// ui.window.classList.add("connecting");
+					let fullTip = window.ui.create.div(".fullsize.connectlayer");
+					fullTip.style.background="rgba(0, 0, 0, 0.5)";
+					document.body.appendChild(fullTip);
+					window.ui.create.div("", "正在初始化，请等待刷新...", fullTip);
+				}
 				//当且仅当初次加载时执行，自动刷新掉默认的十周年UI界面变为设置的手杀样式
 				if (e.data?.type === "loadFinish") {
 					let extensionStyle=window.decadeUI?.config?.newDecadeStyle;
@@ -183,6 +191,7 @@
 						window.game.saveConfig('connect_doudizhu_bannedcards',['muniu'])
 						window.game.saveConfig('connect_single_bannedcards',['muniu'])
 						window.game.saveConfig("extension_十周年UI_newDecadeStyle", 'othersOn');
+						window.localStorage.setItem('initConfigFinish',"1");
 						
 						setTimeout(() => {
 							window.location.reload();

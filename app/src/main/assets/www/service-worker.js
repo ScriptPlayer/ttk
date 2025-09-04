@@ -83,6 +83,16 @@ self.addEventListener("fetch", event => {
 		event.respondWith(rep);
 		return;
 	}
+
+	if(url.pathname.endsWith("game/keyWords.js")){
+		self.clients.matchAll().then(clients => {
+			clients.forEach(client => {
+				client.postMessage({
+					type: "jsLoadFinish"
+				});
+			});
+		});
+	}
 	
 	if (url.pathname.endsWith("/assets/animation/effect_zhulutianxia.png")) {
 		console.log("=====资源已加载完成=====")
