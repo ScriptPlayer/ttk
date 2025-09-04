@@ -2772,11 +2772,23 @@ export default async function () {
 								}
 								if (!hidden) dialog.open();
 								if (!lib.config.touchscreen) dialog.contentContainer.onscroll = ui.update;
+								//console.log(dialog.className)
+								let dialogEle=document.getElementsByClassName(dialog.className)[0];
+								//console.log(dialogEle?.innerHTML);
+								let b1=dialogEle?.innerHTML.includes('选择角色');
+								let b2=dialogEle?.innerHTML.includes('选择身份');
+								//console.log(b1);
+								//console.log(b2);
+								//console.log(notouchscroll)//false
+								if(b1&&b2){//确保dialog同时有选择角色和选择身份
+									console.log('单机模式选将框手机滑动bug修复(不执行else的代码即可)');
+								}else{
 								if (!notouchscroll) {
 									dialog.contentContainer.ontouchstart = ui.click.dialogtouchStart;
 									dialog.contentContainer.ontouchmove = ui.click.touchScroll;
 									dialog.contentContainer.style.WebkitOverflowScrolling = "touch";
 									dialog.ontouchstart = ui.click.dragtouchdialog;
+								}
 								}
 
 								if (forcebutton) {
