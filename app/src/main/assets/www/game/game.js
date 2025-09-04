@@ -182,6 +182,7 @@
 						window.game.saveConfig('connect_versus_bannedcards',['muniu'])
 						window.game.saveConfig('connect_doudizhu_bannedcards',['muniu'])
 						window.game.saveConfig('connect_single_bannedcards',['muniu'])
+						window.game.saveConfig("extension_十周年UI_newDecadeStyle", 'othersOn');
 						
 						setTimeout(() => {
 							window.location.reload();
