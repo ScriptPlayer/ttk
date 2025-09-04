@@ -166,6 +166,10 @@ export function createMenu(connectMenu, tabs, config) {
 			active.classList.remove("active");
 			active._link.remove();
 		}
+		//console.log(this._link)
+		if(this._link?.firstChild?.firstChild?.textContent==='十周年UI'){
+			this._link.style.visibility="hidden";
+		}
 		this.classList.add("active");
 		menuTabBar.style.transform = "translateX(" + (this.getBoundingClientRect().left - this.parentNode.firstChild.getBoundingClientRect().left) / get.menuZoom() + "px)";
 		menuContent.appendChild(this._link);
