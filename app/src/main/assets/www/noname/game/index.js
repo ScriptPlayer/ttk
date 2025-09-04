@@ -4710,7 +4710,7 @@ export class Game extends GameCompatible {
 			if(lib.video?.length==0&&content!=null&&content.length!=null
 				&&content.length>0&&content[0]==="跋扈"){
 				console.log('lib.video?.length===',lib.video?.length)
-				//console.log(game);
+				//console.log(lib);
 				//console.log(game.players);
 				let content=[];
 				let players=game.players;
@@ -6347,6 +6347,7 @@ export class Game extends GameCompatible {
 			// console.log(lib);
 			let store = lib.db.transaction(["video"], "readwrite").objectStore("video");
 			let videos = lib.videos.slice(0);
+			console.log('videos.length===',videos.length)
 			for (let i = 0; i < videos.length; i++) {
 				if (videos[i].starred) {
 					videos.splice(i--, 1);
@@ -6356,6 +6357,7 @@ export class Game extends GameCompatible {
 				if (videos.length >= 20) {
 					let toremove = videos.pop();
 					lib.videos.remove(toremove);
+					console.log('删除的录像：',toremove.time)
 					store.delete(toremove.time);
 				} else {
 					break;
@@ -6371,8 +6373,19 @@ export class Game extends GameCompatible {
 			let map = generateIndexMap(result.libVideo,lib.video);
 			console.log('映射关系为====',map);
 			let resultLibVideo=fixLibVideo(map,result.libVideo)
+			let vidName="video";
+			let vidMod=lib.configOL.mode;
+			if(vidMod==='doudizhu'){
+				vidName="斗地主"
+			}else if(vidMod==='identity'){
+				vidName='身份场';
+			}else{
+				vidName=vidMod;
+			}
+			let playerName=game.me.getName();
+			let newvidNameArr=[playerName,vidName];
 			let newvid = {
-				name: 'video',
+				name: newvidNameArr,
 				mode: lib.configOL.mode,
 				video: resultLibVideo,
 				win: arguments[1],
@@ -6661,6 +6674,7 @@ export class Game extends GameCompatible {
 		// if(true){
 		if (game.players.length) {
 			table = document.createElement("table");
+			table.style.fontSize="26px";
 			tr = document.createElement("tr");
 			tr.appendChild(document.createElement("td"));
 			td = document.createElement("td");
@@ -6736,7 +6750,9 @@ export class Game extends GameCompatible {
 		}
 		if (game.dead.length) {
 			table = document.createElement("table");
-			table.style.opacity = "0.5";
+			table.style.fontSize="26px";
+			table.style.color="#c73a3b";
+			table.style.opacity = "0.8";
 			if (game.players.length == 0) {
 				tr = document.createElement("tr");
 				tr.appendChild(document.createElement("td"));
@@ -6814,6 +6830,7 @@ export class Game extends GameCompatible {
 		}
 		if (game.additionaldead && game.additionaldead.length) {
 			table = document.createElement("table");
+			table.style.fontSize="26px";
 			table.style.opacity = "0.5";
 			for (i = 0; i < game.additionaldead.length; i++) {
 				tr = document.createElement("tr");
@@ -6921,6 +6938,8 @@ export class Game extends GameCompatible {
 		if (!_status.video && vinum && game.getVideoName && window.indexedDB && _status.videoInited) {
 			let store = lib.db.transaction(["video"], "readwrite").objectStore("video");
 			let videos = lib.videos.slice(0);
+			console.log('videos.length===',videos.length)
+			//console.log(videos)
 			for (let i = 0; i < videos.length; i++) {
 				if (videos[i].starred) {
 					videos.splice(i--, 1);
@@ -6929,6 +6948,7 @@ export class Game extends GameCompatible {
 			for (let deletei = 0; deletei < 5; deletei++) {
 				if (videos.length >= vinum) {
 					let toremove = videos.pop();
+					console.log('删除的录像：',toremove.time)
 					lib.videos.remove(toremove);
 					store.delete(toremove.time);
 				} else {
