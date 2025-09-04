@@ -4839,7 +4839,7 @@ export default async function () {
 					};
 
 					//联机禁用chhoseToGuanxing函数
-					if (!_status.connectMode) {
+					if (!true) {
 					lib.element.content.chooseToGuanxing = function () {
 						"step 0";
 						if (player.isUnderControl()) game.modeSwapPlayer(player);
