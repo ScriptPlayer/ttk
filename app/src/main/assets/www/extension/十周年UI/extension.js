@@ -2772,38 +2772,38 @@ export default async function () {
 								}
 								if (!hidden) dialog.open();
 								if (!lib.config.touchscreen) dialog.contentContainer.onscroll = ui.update;
-								//console.log(dialog.className)
-								let dialogEle=document.getElementsByClassName(dialog.className)[0];
-								//结束对话框，一般都是第二个dialog才是，小概率第一个就是。
-								let dialogEle2=document.getElementsByClassName(dialog.className)[1];
-								//console.log(dialogEle?.innerHTML);
-								//console.log(dialogEle2?.innerHTML);
-								let b1=dialogEle?.innerHTML.includes('选择角色');
-								let b2=dialogEle?.innerHTML.includes('选择身份');
-								let b3=dialogEle?.innerHTML.includes('战斗胜利');//小概率
-								let b4=dialogEle?.innerHTML.includes('战斗失败');//小概率
-								let b5=dialogEle2?.innerHTML.includes('战斗胜利');
-								let b6=dialogEle2?.innerHTML.includes('战斗失败');
-								//console.log(b1);
-								//console.log(b2);
-								//console.log(notouchscroll)//false
-								if((b1&&b2)||b5||b6||b3||b4){//确保dialog同时有选择角色和选择身份 或者 是结束的dialog
-									//console.log('单机模式选将框手机滑动bug修复(不执行else的代码即可)');//不行
-									//单机模式选将框手机滑动bug修复，else中的代码会在之前就已经执行，需要在这里取消
-									//console.log(dialogEle.contentContainer.ontouchstart)
-									//console.log(dialogEle.ontouchstart);
-									dialogEle.contentContainer.ontouchstart = null;
-									dialogEle.contentContainer.ontouchmove = null;
-									dialogEle.contentContainer.style.WebkitOverflowScrolling = "";
-									dialogEle.ontouchstart = null;
-								}else{
-								if (!notouchscroll) {
+								// //console.log(dialog.className)
+								// let dialogEle=document.getElementsByClassName(dialog.className)[0];
+								// //结束对话框，一般都是第二个dialog才是，小概率第一个就是。
+								// let dialogEle2=document.getElementsByClassName(dialog.className)[1];
+								// //console.log(dialogEle?.innerHTML);
+								// //console.log(dialogEle2?.innerHTML);
+								// let b1=dialogEle?.innerHTML.includes('选择角色');
+								// let b2=dialogEle?.innerHTML.includes('选择身份');
+								// let b3=dialogEle?.innerHTML.includes('战斗胜利');//小概率
+								// let b4=dialogEle?.innerHTML.includes('战斗失败');//小概率
+								// let b5=dialogEle2?.innerHTML.includes('战斗胜利');
+								// let b6=dialogEle2?.innerHTML.includes('战斗失败');
+								// //console.log(b1);
+								// //console.log(b2);
+								// //console.log(notouchscroll)//false
+								// if((b1&&b2)||b5||b6||b3||b4){//确保dialog同时有选择角色和选择身份 或者 是结束的dialog
+								// 	//console.log('单机模式选将框手机滑动bug修复(不执行else的代码即可)');//不行
+								// 	//单机模式选将框手机滑动bug修复，else中的代码会在之前就已经执行，需要在这里取消
+								// 	//console.log(dialogEle.contentContainer.ontouchstart)
+								// 	//console.log(dialogEle.ontouchstart);
+								// 	dialogEle.contentContainer.ontouchstart = null;
+								// 	dialogEle.contentContainer.ontouchmove = null;
+								// 	dialogEle.contentContainer.style.WebkitOverflowScrolling = "";
+								// 	dialogEle.ontouchstart = null;
+								// }else{
+								if (!notouchscroll&&window.thisIsMobileDevice===false) {
 									dialog.contentContainer.ontouchstart = ui.click.dialogtouchStart;
 									dialog.contentContainer.ontouchmove = ui.click.touchScroll;
 									dialog.contentContainer.style.WebkitOverflowScrolling = "touch";
 									dialog.ontouchstart = ui.click.dragtouchdialog;
 								}
-								}
+								// }
 
 								if (forcebutton) {
 									dialog.forcebutton = true;

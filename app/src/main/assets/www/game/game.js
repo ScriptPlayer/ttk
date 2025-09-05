@@ -164,13 +164,28 @@
 				if (e.data?.type === "reload") {
 					window.location.reload();
 				}
-				if (e.data?.type === "jsLoadFinish"&&window.localStorage.getItem('initConfigFinish')==null) {
+				if (e.data?.type === "jsLoadFinish") {
 					console.log("js加载完成");
+					window.thisIsMobileDevice=false;
+					function isMobileDevice() {
+						const userAgent = navigator.userAgent.toLowerCase();
+						const isIOS = /iphone|ipad|ipod/.test(userAgent);
+						const isAndroid = /android/.test(userAgent);
+						const isMobileUA = isIOS || isAndroid || /(mobile|blackberry|iemobile|opera mini)/i.test(userAgent);
+						const hasTouch = 'maxTouchPoints' in navigator ? navigator.maxTouchPoints > 1 : false;
+						const isMacWithTouch = /macintosh/.test(userAgent) && hasTouch; // 处理 iPad 桌面模式
+
+						return isMobileUA || isMacWithTouch;
+					}
+					window.thisIsMobileDevice=isMobileDevice();
+					console.log('是不是移动设备？',window.thisIsMobileDevice);
+					if(window.localStorage.getItem('initConfigFinish')==null){
 					// ui.window.classList.add("connecting");
 					let fullTip = window.ui.create.div(".fullsize.connectlayer");
 					fullTip.style.background="rgba(0, 0, 0, 0.5)";
 					document.body.appendChild(fullTip);
 					window.ui.create.div("", "正在初始化，请等待刷新...", fullTip);
+					}
 				}
 				//当且仅当初次加载时执行，自动刷新掉默认的十周年UI界面变为设置的手杀样式
 				if (e.data?.type === "loadFinish") {
