@@ -24,7 +24,7 @@ const characterSort = {
 	// mobile_standard: ["xin_xiahoudun", "xin_zhangfei", "old_yuanshu"],
 	mobile_shenhua_feng: ["re_xiaoqiao", "xin_zhoutai"],
 	// mobile_shenhua_huo: ["re_pangtong", "re_sp_zhugeliang", "re_xunyu", "re_dianwei", "re_yanwen", "xin_yuanshao"],
-	mobile_shenhua_huo: ["re_sp_zhugeliang", "re_xunyu", "re_yanwen"],
+	mobile_shenhua_huo: ["re_sp_zhugeliang", "re_xunyu", "re_yanwen", "pot_weiyan"],
 	// mobile_shenhua_lin: ["re_dongzhuo", "re_sunjian", "re_zhurong"],
 	// mobile_shenhua_shan: ["re_liushan", "re_dengai", "re_jiangwei", "re_caiwenji", "re_zhangzhang", "re_sunben"],
 	mobile_shenhua_shan: ["re_dengai", "re_jiangwei", "re_sunben"],

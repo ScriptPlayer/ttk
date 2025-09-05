@@ -174,7 +174,6 @@
 						const isMobileUA = isIOS || isAndroid || /(mobile|blackberry|iemobile|opera mini)/i.test(userAgent);
 						const hasTouch = 'maxTouchPoints' in navigator ? navigator.maxTouchPoints > 1 : false;
 						const isMacWithTouch = /macintosh/.test(userAgent) && hasTouch; // 处理 iPad 桌面模式
-
 						return isMobileUA || isMacWithTouch;
 					}
 					window.thisIsMobileDevice=isMobileDevice();
@@ -205,6 +204,10 @@
 						window.game.saveConfig('connect_versus_bannedcards',['muniu'])
 						window.game.saveConfig('connect_doudizhu_bannedcards',['muniu'])
 						window.game.saveConfig('connect_single_bannedcards',['muniu'])
+						window.game.saveConfig('connect_identity_banned',['pot_weiyan'])
+						window.game.saveConfig('connect_versus_banned',['pot_weiyan'])
+						window.game.saveConfig('connect_doudizhu_banned',['pot_weiyan'])
+						window.game.saveConfig('connect_single_banned',['pot_weiyan'])
 						window.game.saveConfig("extension_十周年UI_newDecadeStyle", 'othersOn');
 						window.localStorage.setItem('initConfigFinish',"1");
 						

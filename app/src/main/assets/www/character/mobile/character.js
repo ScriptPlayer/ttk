@@ -162,6 +162,12 @@ const characters = {
 			"xinfu_pdgyingshi"
 		]
 	},
+	pot_weiyan: {
+		hp: 4,
+		sex: "male",
+		group: "shu",
+		skills: ["potzhongao", "potzhuangshi", "potyinzhan"],
+	},
 	"re_sunben": {
 		"sex": "male",
 		"group": "wu",
