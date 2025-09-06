@@ -197,6 +197,11 @@
 						window.game.saveConfig('connect_doudizhu_banned',['pot_weiyan'])
 						window.game.saveConfig('connect_single_banned',['pot_weiyan'])
 						window.game.saveConfig("extension_十周年UI_newDecadeStyle", 'othersOn');
+						try{
+							let playerRandomName='玩家'+Math.floor(Math.random() * 1000).toString().padStart(3, '0')
+							window.game.saveConfig("connect_nickname", playerRandomName);
+							window.game.saveConfig("connect_nickname", playerRandomName, "connect");
+						}catch(e){}
 						window.localStorage.setItem('initConfigFinish',"1");
 						if(window.window.thisIsMobileDevice){
 							console.log('移动设备设置缩放0.9');

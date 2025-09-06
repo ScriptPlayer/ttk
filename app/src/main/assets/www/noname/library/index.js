@@ -7143,6 +7143,16 @@ export class Library {
 						game.saveConfig("connect_avatar", item, "connect");
 					},
 				},
+				connect_address: {
+					name: "联机地址",
+					input: true,
+					frequent: true,
+					onclick(item) {
+						console.log(item);
+						// game.saveConfig("connect_nickname", item);
+						// game.saveConfig("connect_avatar", item, "connect");
+					},
+				},
 				hall_ip: {
 					name: "联机大厅",
 					input: true,
@@ -7176,7 +7186,7 @@ export class Library {
 				},
 				read_clipboard: {
 					name: "读取邀请链接",
-					init: true,
+					init: false,
 					frequent: true,
 					intro: "读取剪贴板以解析邀请链接自动加入联机房间",
 				},

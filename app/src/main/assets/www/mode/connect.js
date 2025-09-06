@@ -9,7 +9,9 @@ export default () => {
 		start() {
 			var directstartmode = lib.config.directstartmode;
 			ui.create.menu(true);
-			event.textnode = ui.create.div("", "输入联机地址");
+			let addressTip="请在：选项-开始-联机处正确填写联机地址"
+			// event.textnode = ui.create.div("", "输入联机地址");
+			event.textnode = ui.create.div("", addressTip);
 			var createNode = function () {
 				if (event.created) {
 					return;
@@ -55,8 +57,13 @@ export default () => {
 				node.style.webkitUserSelect = "text";
 				node.style.textAlign = "center";
 				node.style.overflow = "hidden";
+				node.style.visibility="hidden";
 
 				var connect = function (e) {
+					if(failConnect){
+						location.reload();
+						return;
+					}
 					event.textnode.textContent = "正在连接...";
 					clearTimeout(event.timeout);
 					if (e) {
@@ -78,7 +85,7 @@ export default () => {
 						}
 						if (event.textnode) {
 							alert("连接失败");
-							event.textnode.textContent = "输入联机地址";
+							event.textnode.textContent = addressTip;
 						}
 					});
 				};
@@ -107,6 +114,8 @@ export default () => {
 				button.style.width = "70px";
 				button.style.left = "calc(50% - 35px)";
 				button.style.top = "calc(50% + 60px)";
+				button.style.visibility="hidden";
+				button.id="connectBtnId"
 				ui.window.appendChild(button);
 				ui.ipbutton = button;
 
@@ -153,55 +162,75 @@ export default () => {
 					},
 					220
 				);
-				if (get.config("read_clipboard", "connect")) {
-					var ced = false;
-					var read = text => {
-						try {
-							var text2 = text.split("\n")[2];
-							var ip = text2.slice(5);
-							if (ip.length > 0 && text2.startsWith("联机地址:") && (ced || confirm("是否根据剪贴板的邀请链接以进入联机地址和房间？"))) {
-								node.innerHTML = ip;
-								event.textnode.innerHTML = "正在连接...";
-								clearTimeout(event.timeout);
-								game.saveConfig("last_ip", node.innerHTML);
-								game.connect(node.innerHTML, function (success) {
-									if (!success && event.textnode) {
-										alert("邀请链接解析失败");
-										event.textnode.innerHTML = "输入联机地址";
-									}
-									if (success) {
-										_status.read_clipboard_text = text;
-									}
-								});
-							}
-						} catch (e) {
-							console.log(e);
-						}
-					};
-					window.focus();
-					if (navigator.clipboard && lib.node) {
-						navigator.clipboard
-							.readText()
-							.then(read)
-							.catch(_ => {});
-					} else {
-						var input = ui.create.node("textarea", ui.window, { opacity: "0" });
-						input.select();
-						var result = document.execCommand("paste");
-						input.blur();
-						ui.window.removeChild(input);
-						if (result || input.value.length > 0) {
-							read(input.value);
-						}
-						// else if (confirm("是否输入邀请链接以进入联机地址和房间？")) {
-						// 	ced = true;
-						// 	var text = prompt("请输入邀请链接");
-						// 	if (typeof text == "string" && text.length > 0) {
-						// 		read(text);
-						// 	}
+				var failConnect=false;
+				let connect_address=localStorage.getItem('connect_address');
+				if(connect_address!=null){
+					node.textContent=connect_address;
+					button.click();
+					setTimeout(() => {
+						console.log('已经等待2秒，如果连接按钮还存在则取消隐藏')
+						// if(event.textnode){
+						// 	event.textnode.textContent=addressTip;
 						// }
-					}
+						let connectBtn=document.getElementById('connectBtnId');
+						if(connectBtn){
+							failConnect=true;
+							console.log(connectBtn);
+							connectBtn.textContent="重试";
+							connectBtn.style.visibility="visible";
+						}
+					}, 2000);
 				}
+				
+				// if (get.config("read_clipboard", "connect")) {
+				// 	var ced = false;
+				// 	var read = text => {
+				// 		try {
+				// 			var text2 = text.split("\n")[2];
+				// 			var ip = text2.slice(5);
+				// 			if (ip.length > 0 && text2.startsWith("联机地址:") && (ced || confirm("是否根据剪贴板的邀请链接以进入联机地址和房间？"))) {
+				// 				node.innerHTML = ip;
+				// 				event.textnode.innerHTML = "正在连接...";
+				// 				clearTimeout(event.timeout);
+				// 				game.saveConfig("last_ip", node.innerHTML);
+				// 				game.connect(node.innerHTML, function (success) {
+				// 					if (!success && event.textnode) {
+				// 						alert("邀请链接解析失败");
+				// 						event.textnode.innerHTML = "输入联机地址";
+				// 					}
+				// 					if (success) {
+				// 						_status.read_clipboard_text = text;
+				// 					}
+				// 				});
+				// 			}
+				// 		} catch (e) {
+				// 			console.log(e);
+				// 		}
+				// 	};
+				// 	window.focus();
+				// 	if (navigator.clipboard && lib.node) {
+				// 		navigator.clipboard
+				// 			.readText()
+				// 			.then(read)
+				// 			.catch(_ => {});
+				// 	} else {
+				// 		var input = ui.create.node("textarea", ui.window, { opacity: "0" });
+				// 		input.select();
+				// 		var result = document.execCommand("paste");
+				// 		input.blur();
+				// 		ui.window.removeChild(input);
+				// 		if (result || input.value.length > 0) {
+				// 			read(input.value);
+				// 		}
+				// 		// else if (confirm("是否输入邀请链接以进入联机地址和房间？")) {
+				// 		// 	ced = true;
+				// 		// 	var text = prompt("请输入邀请链接");
+				// 		// 	if (typeof text == "string" && text.length > 0) {
+				// 		// 		read(text);
+				// 		// 	}
+				// 		// }
+				// 	}
+				// }
 				lib.init.onfree();
 			};
 			if (window.isNonameServer) {

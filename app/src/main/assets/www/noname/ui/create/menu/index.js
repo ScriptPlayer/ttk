@@ -345,6 +345,37 @@ export function createConfig(config, position) {
 				input.innerHTML = input.innerHTML.replace(/<br>/g, "");
 				game.saveConfig("hall_ip", input.innerHTML, "connect");
 			};
+		} else if (config.name == "联机地址") {
+			node.style.color='#ffff96';
+			input.innerHTML = '点此设置';
+			input.style.border="1px solid";
+			input.style.borderRadius="5px";
+			input.onfocus=function(){
+				input.blur();
+			}
+			input.onblur = function () {
+				// 显示输入弹窗（参数1：提示文本；参数2：输入框默认值）
+				let connect_address=localStorage.getItem('connect_address');
+				if(connect_address==null){
+					connect_address='';
+				}
+				const userInput = prompt('请输入联机地址：', connect_address);
+
+				// 处理用户输入（用户点击确认返回输入内容，点击取消返回 null）
+				if (userInput !== null) {
+					if (userInput.trim() === '') {
+						alert('输入不能为空！');
+					} else {
+						console.log('用户输入内容：', userInput);
+						// 这里可以添加业务逻辑（如提交到服务器）
+						let resultAddress=userInput?.trim();
+						resultAddress=resultAddress.replace("：",":");
+						localStorage.setItem('connect_address',resultAddress);
+					}
+				} else {
+					console.log('用户取消了输入');
+				}
+			};
 		} else {
 			input.innerHTML = config.init;
 			input.onblur = config.onblur;

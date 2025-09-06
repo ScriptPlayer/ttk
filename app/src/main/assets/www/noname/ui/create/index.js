@@ -3504,6 +3504,7 @@ export class Create {
 		bar.style.top = "calc(200% / 7 - 120px + 5px)";
 		bar.style.textAlign = "center";
 		var ipbar = ui.create.div(".shadowed", ip, bar);
+		ipbar.style.visibility="hidden";
 		ipbar.style.padding = "4px";
 		ipbar.style.borderRadius = "2px";
 		ipbar.style.position = "relative";
