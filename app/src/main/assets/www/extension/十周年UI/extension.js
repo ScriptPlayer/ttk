@@ -10710,10 +10710,12 @@ export default async function () {
 
 				//--------菜篮子-------//
 
+				//菜篮子和随机数量不用显示
 				window.cailanzi = ui.create.div("hidden", "");
 				window.cailanzi.style.cssText = "display: block;--w: 100px;--h: calc(var(--w) * 59/150);width: var(--w);height: var(--h);left:-230px;bottom:250px;transition:none;background-size:100% 100%";
 
 				window.cailanzi.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/cailanzi.png");
+				window.cailanzi.style.visibility="hidden";
 
 				window.chatBg.appendChild(window.cailanzi);
 
@@ -10721,6 +10723,7 @@ export default async function () {
 				window.shuliang.innerText = Math.floor(Math.random() * (999 - 100 + 1) + 100);
 				window.shuliang.style.cssText = "display: block;left:-180px;bottom:260px;font-family:'shousha';color:#97856a;font-weight: 900; text-shadow:none;transition:none;background-size:100% 100%";
 
+				window.shuliang.style.visibility="hidden";
 				window.chatBg.appendChild(window.shuliang);
 
 				game.open_emoji = function () {
@@ -10897,7 +10900,7 @@ export default async function () {
 				window.ipt.style["background-image"] = "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4))";
 				//window.ipt.style['box-shadow']='rgba(0, 0, 0, 0.4) 0 0 0 1px, rgba(0, 0, 0, 0.2) 0 3px 10px';
 				if (window.input && window.input.value) window.input_value = window.input.value;
-				window.ipt.innerHTML = '<input type="text" value=' + (window.input_value || "请输入文字") + ' style="color:white;font-family:shousha;width:calc(100% - 10px);text-align:left;"></input>';
+				window.ipt.innerHTML = '<input type="text" value=' + (window.input_value || "现在只有鲜花和鸡蛋能用") + ' style="color:white;font-family:shousha;width:calc(100% - 10px);text-align:left;"></input>';
 				window.input = window.ipt.querySelector("input");
 				window.input.style.backgroundImage = "url('" + lib.assetURL + "extension/十周年UI/shoushaUI/sayplay/say.png')";
 				window.input.style.backgroundSize = "120% 120%";
