@@ -198,6 +198,12 @@
 						window.game.saveConfig('connect_single_banned',['pot_weiyan'])
 						window.game.saveConfig("extension_十周年UI_newDecadeStyle", 'othersOn');
 						window.localStorage.setItem('initConfigFinish',"1");
+						if(window.window.thisIsMobileDevice){
+							console.log('移动设备设置缩放0.9');
+							window.game.saveConfig("ui_zoom", "90%");
+							//window.game.documentZoom = 0.9;
+							//window.ui.updatez();
+						}
 						
 						setTimeout(() => {
 							window.location.reload();
