@@ -7130,7 +7130,7 @@ export class Library {
 					frequent: true,
 					onclick(item) {
 						game.saveConfig("connect_nickname", item);
-						game.saveConfig("connect_avatar", item, "connect");
+						game.saveConfig("connect_nickname", item, "connect");
 					},
 				},
 				connect_avatar: {
