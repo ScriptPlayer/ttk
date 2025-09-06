@@ -286,59 +286,59 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 		};
 		document.body.appendChild(head);
 
-		if (lib.config.mode == "identity" || lib.config.mode == "doudizhu" || lib.config.mode == "versus" || lib.config.mode == "guozhan") {
-			/*左上角问号框*/
-			var tipshow = ui.create.node("img");
-			tipshow.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/shenfen.png";
-			tipshow.style.cssText = "display: block;--w: 400px;--h: calc(var(--w) * 279/2139);width: var(--w);height: var(--h);position: absolute;top: -1px;left:-45px;background-color: transparent;z-index:1";
-			tipshow.onclick = function () {
-				var popuperContainer = ui.create.div(".popup-container", ui.window);
-				game.playAudio("../extension/十周年UI/shoushaUI/lbtn/images/SSCD/label.mp3");
-				if (lib.config.mode == "identity") {
-					if (game.me.identity == "zhu") {
-						ui.create.div(".sfrwzhugong", popuperContainer);
-					} else if (game.me.identity == "zhong") {
-						ui.create.div(".sfrwchongchen", popuperContainer);
-					} else if (game.me.identity == "fan") {
-						ui.create.div(".sfrwfanzei", popuperContainer);
-					} else if (game.me.identity == "nei") {
-						ui.create.div(".sfrwneijian", popuperContainer);
-					}
-				}
-				if (lib.config.mode == "doudizhu") {
-					if (game.me.identity == "zhu") {
-						ui.create.div(".sfrwdizhu", popuperContainer);
-					} else if (game.me.identity == "fan") {
-						ui.create.div(".sfrwnongmin", popuperContainer);
-					}
-				}
-				if (lib.config.mode == "versus") {
-					ui.create.div(".sfrwhu", popuperContainer);
-				}
-				if (lib.config.mode == "guozhan") {
-					if (game.me.group == "unknown" || game.me.group == "undefined") {
-						ui.create.div(".sfrwundefined", popuperContainer);
-					} else if (game.me.group == "wei") {
-						ui.create.div(".sfrwweiguo", popuperContainer);
-					} else if (game.me.group == "shu") {
-						ui.create.div(".sfrwshuguo", popuperContainer);
-					} else if (game.me.group == "wu") {
-						ui.create.div(".sfrwwuguo", popuperContainer);
-					} else if (game.me.group == "qun") {
-						ui.create.div(".sfrwqunxiong", popuperContainer);
-					} else if (game.me.group == "jin") {
-						ui.create.div(".sfrwjinguo", popuperContainer);
-					} else if (game.me.group == "ye") {
-						ui.create.div(".sfrwyexinjia", popuperContainer);
-					}
-				}
-				popuperContainer.addEventListener("click", event => {
-					game.playAudio("../extension/十周年UI/shoushaUI/lbtn/images/SSCD/caidan.mp3");
-					popuperContainer.delete(200);
-				});
-			};
-			document.body.appendChild(tipshow);
-		}
+		// if (lib.config.mode == "identity" || lib.config.mode == "doudizhu" || lib.config.mode == "versus" || lib.config.mode == "guozhan") {
+		// 	/*左上角问号框*/
+		// 	var tipshow = ui.create.node("img");
+		// 	tipshow.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/shenfen.png";
+		// 	tipshow.style.cssText = "display: block;--w: 400px;--h: calc(var(--w) * 279/2139);width: var(--w);height: var(--h);position: absolute;top: -1px;left:-45px;background-color: transparent;z-index:1";
+		// 	tipshow.onclick = function () {
+		// 		var popuperContainer = ui.create.div(".popup-container", ui.window);
+		// 		game.playAudio("../extension/十周年UI/shoushaUI/lbtn/images/SSCD/label.mp3");
+		// 		if (lib.config.mode == "identity") {
+		// 			if (game.me.identity == "zhu") {
+		// 				ui.create.div(".sfrwzhugong", popuperContainer);
+		// 			} else if (game.me.identity == "zhong") {
+		// 				ui.create.div(".sfrwchongchen", popuperContainer);
+		// 			} else if (game.me.identity == "fan") {
+		// 				ui.create.div(".sfrwfanzei", popuperContainer);
+		// 			} else if (game.me.identity == "nei") {
+		// 				ui.create.div(".sfrwneijian", popuperContainer);
+		// 			}
+		// 		}
+		// 		if (lib.config.mode == "doudizhu") {
+		// 			if (game.me.identity == "zhu") {
+		// 				ui.create.div(".sfrwdizhu", popuperContainer);
+		// 			} else if (game.me.identity == "fan") {
+		// 				ui.create.div(".sfrwnongmin", popuperContainer);
+		// 			}
+		// 		}
+		// 		if (lib.config.mode == "versus") {
+		// 			ui.create.div(".sfrwhu", popuperContainer);
+		// 		}
+		// 		if (lib.config.mode == "guozhan") {
+		// 			if (game.me.group == "unknown" || game.me.group == "undefined") {
+		// 				ui.create.div(".sfrwundefined", popuperContainer);
+		// 			} else if (game.me.group == "wei") {
+		// 				ui.create.div(".sfrwweiguo", popuperContainer);
+		// 			} else if (game.me.group == "shu") {
+		// 				ui.create.div(".sfrwshuguo", popuperContainer);
+		// 			} else if (game.me.group == "wu") {
+		// 				ui.create.div(".sfrwwuguo", popuperContainer);
+		// 			} else if (game.me.group == "qun") {
+		// 				ui.create.div(".sfrwqunxiong", popuperContainer);
+		// 			} else if (game.me.group == "jin") {
+		// 				ui.create.div(".sfrwjinguo", popuperContainer);
+		// 			} else if (game.me.group == "ye") {
+		// 				ui.create.div(".sfrwyexinjia", popuperContainer);
+		// 			}
+		// 		}
+		// 		popuperContainer.addEventListener("click", event => {
+		// 			game.playAudio("../extension/十周年UI/shoushaUI/lbtn/images/SSCD/caidan.mp3");
+		// 			popuperContainer.delete(200);
+		// 		});
+		// 	};
+		// 	document.body.appendChild(tipshow);
+		// }
 	});
 
 	var plugin = {
