@@ -13926,7 +13926,15 @@ export class Player extends HTMLDivElement {
 					cardx.classList.add("fakeequip");
 				} else {
 					delete cardx.viewAs;
-					cardx.node.name2.innerHTML = `${suit}${number} ${cardShownName}`;
+					// cardx.node.name2.innerHTML = `${suit}${number} ${cardShownName}`;
+					let colorRed=`<span style="color: #a82424;-webkit-text-stroke: 0.2px white;">${suit}</span>`;
+					// let colorBlack=`<span style="color: #2f2e2b;text-shadow: white 0 0 5px;">${suit}</span>`;
+					let colorBlack=`<span style="color: #2f2e2b;-webkit-text-stroke: 0.2px white;">${suit}</span>`;
+					if(suit==='♦︎'||suit==='♥︎'){
+						cardx.node.name2.innerHTML = `${colorRed}${number} ${cardShownName}`;
+					}else{
+						cardx.node.name2.innerHTML = `${colorBlack}${number} ${cardShownName}`;
+					}
 					cardx.classList.remove("fakeequip");
 				}
 				let equipped = false,
