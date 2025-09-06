@@ -166,18 +166,6 @@
 				}
 				if (e.data?.type === "jsLoadFinish") {
 					console.log("js加载完成");
-					window.thisIsMobileDevice=false;
-					function isMobileDevice() {
-						const userAgent = navigator.userAgent.toLowerCase();
-						const isIOS = /iphone|ipad|ipod/.test(userAgent);
-						const isAndroid = /android/.test(userAgent);
-						const isMobileUA = isIOS || isAndroid || /(mobile|blackberry|iemobile|opera mini)/i.test(userAgent);
-						const hasTouch = 'maxTouchPoints' in navigator ? navigator.maxTouchPoints > 1 : false;
-						const isMacWithTouch = /macintosh/.test(userAgent) && hasTouch; // 处理 iPad 桌面模式
-						return isMobileUA || isMacWithTouch;
-					}
-					window.thisIsMobileDevice=isMobileDevice();
-					console.log('是不是移动设备？',window.thisIsMobileDevice);
 					if(window.localStorage.getItem('initConfigFinish')==null){
 					// ui.window.classList.add("connecting");
 					let fullTip = window.ui.create.div(".fullsize.connectlayer");

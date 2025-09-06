@@ -7363,6 +7363,18 @@ export default async function () {
 
 			decadeUI.init();
 			console.timeEnd(decadeUIName);
+			window.thisIsMobileDevice=false;
+			function isMobileDevice() {
+				const userAgent = navigator.userAgent.toLowerCase();
+				const isIOS = /iphone|ipad|ipod/.test(userAgent);
+				const isAndroid = /android/.test(userAgent);
+				const isMobileUA = isIOS || isAndroid || /(mobile|blackberry|iemobile|opera mini)/i.test(userAgent);
+				const hasTouch = 'maxTouchPoints' in navigator ? navigator.maxTouchPoints > 1 : false;
+				const isMacWithTouch = /macintosh/.test(userAgent) && hasTouch; // 处理 iPad 桌面模式
+				return isMobileUA || isMacWithTouch;
+			}
+			window.thisIsMobileDevice=isMobileDevice();
+			console.log('是不是移动设备？',window.thisIsMobileDevice);
 			//手杀UI
 			//发动技能函数
 			var shoushaUI = lib.element.player.trySkillAnimate;
