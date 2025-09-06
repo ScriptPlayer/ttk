@@ -10502,7 +10502,13 @@ export default async function () {
 					var list = game.players;
 					for (let i = 0; i < game.players.length; i++) {
 						list[i].onclick = function () {
-							if (window.xianhua.thrownn == true) game.me.throwEmotion(this, "flower");
+							if (window.xianhua.thrownn == true) {
+								if(game.online){
+									game.send("throwEmotion", this, "flower");
+								}else{
+									game.me.throwEmotion(this, "flower");
+								}
+							}
 							window.shuliang.innerText = window.shuliang.innerText - 1;
 						};
 					}
@@ -10567,7 +10573,12 @@ export default async function () {
 					for (let i = 0; i < game.players.length; i++) {
 						list[i].onclick = function () {
 							if (window.jidan.thrownn == true) {
-								game.me.throwEmotion(this, "egg");
+								if(game.online){
+									game.send("throwEmotion", this, "egg");
+								}else{
+									game.me.throwEmotion(this, "egg");
+								}
+								
 								window.shuliang.innerText = window.shuliang.innerText - 1;
 							}
 						};
