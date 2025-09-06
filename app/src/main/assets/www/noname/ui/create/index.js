@@ -759,6 +759,7 @@ export class Create {
 	}
 	chat() {
 		var chat = ui.create.system("聊天", null, true);
+		chat.style.visibility="hidden";
 		ui.chatButton = chat;
 		lib.setPopped(chat, ui.click.chat, 220);
 	}
@@ -802,6 +803,12 @@ export class Create {
 			true
 		);
 		ui.roomInfo = chat;
+		ui.roomInfo.style.right="60px"
+		if(game.online){//非房主隐藏
+			ui.roomInfo.style.visibility="hidden";
+		}
+		//setPopped(node, func, width, height, forceclick, paused2) {}
+		//高度原来没传的可以传undefined;而forceclick表示是否为点击显示（手机用点击,电脑则悬浮显示）
 		lib.setPopped(
 			chat,
 			function () {
@@ -811,7 +818,9 @@ export class Create {
 					return uiintro;
 				}
 			},
-			180
+			180,
+			undefined,
+			window.thisIsMobileDevice
 		);
 	}
 	templayer(time) {
@@ -3544,51 +3553,53 @@ export class Create {
 			button.clicked = true;
 		});
 
-		var shareButton = ui.create.div(".menubutton.large.highlight.connectbutton.connectbutton2.pointerdiv", "分享房间", ui.window, function () {
-			var text = `无名杀-联机-${lib.translate[get.mode()]}-${game.connectPlayers.filter(p => p.avatar).length}/${game.connectPlayers.filter(p => !p.classList.contains("unselectable2")).length}\n${get.connectNickname()}邀请你加入${game.roomId}房间\n联机地址:${game.ip}\n请先通过游戏内菜单-开始-联机中启用“读取邀请链接”选项`;
-			window.focus();
-			const fallbackCopyTextToClipboard = function (text) {
-				const textArea = document.createElement("textarea");
-				textArea.value = text;
-				textArea.style.position = "fixed";
-				textArea.style.top = "0";
-				textArea.style.left = "0";
-				textArea.style.width = "1px";
-				textArea.style.height = "1px";
-				textArea.style.padding = "0";
-				textArea.style.border = "none";
-				textArea.style.outline = "none";
-				textArea.style.boxShadow = "none";
-				textArea.style.background = "transparent";
-				document.body.appendChild(textArea);
-				textArea.focus();
-				textArea.select();
-				try {
-					const successful = document.execCommand("copy");
-					if (!successful) {
-						console.error("Unable to copy using execCommand");
-						game.promises.prompt(`###分享内容复制失败，请自行复制以下内容###${text}`, true);
-					} else {
-						game.alert("分享内容复制成功");
-					}
-				} catch (err) {
-					console.error("Unable to copy using execCommand:", err);
-				}
-				document.body.removeChild(textArea);
-			};
-			if ("clipboard" in navigator) {
-				navigator.clipboard
-					.writeText(text)
-					.then(() => {
-						game.alert("分享内容复制成功");
-					})
-					.catch(() => {
-						fallbackCopyTextToClipboard(text);
-					});
-			} else {
-				fallbackCopyTextToClipboard(text);
-			}
-		});
+		// var shareButton = ui.create.div(".menubutton.large.highlight.connectbutton.connectbutton2.pointerdiv", "分享房间", ui.window, function () {
+		// 	var text = `无名杀-联机-${lib.translate[get.mode()]}-${game.connectPlayers.filter(p => p.avatar).length}/${game.connectPlayers.filter(p => !p.classList.contains("unselectable2")).length}\n${get.connectNickname()}邀请你加入${game.roomId}房间\n联机地址:${game.ip}\n请先通过游戏内菜单-开始-联机中启用“读取邀请链接”选项`;
+		// 	window.focus();
+		// 	const fallbackCopyTextToClipboard = function (text) {
+		// 		const textArea = document.createElement("textarea");
+		// 		textArea.value = text;
+		// 		textArea.style.position = "fixed";
+		// 		textArea.style.top = "0";
+		// 		textArea.style.left = "0";
+		// 		textArea.style.width = "1px";
+		// 		textArea.style.height = "1px";
+		// 		textArea.style.padding = "0";
+		// 		textArea.style.border = "none";
+		// 		textArea.style.outline = "none";
+		// 		textArea.style.boxShadow = "none";
+		// 		textArea.style.background = "transparent";
+		// 		document.body.appendChild(textArea);
+		// 		textArea.focus();
+		// 		textArea.select();
+		// 		try {
+		// 			const successful = document.execCommand("copy");
+		// 			if (!successful) {
+		// 				console.error("Unable to copy using execCommand");
+		// 				game.promises.prompt(`###分享内容复制失败，请自行复制以下内容###${text}`, true);
+		// 			} else {
+		// 				game.alert("分享内容复制成功");
+		// 			}
+		// 		} catch (err) {
+		// 			console.error("Unable to copy using execCommand:", err);
+		// 		}
+		// 		document.body.removeChild(textArea);
+		// 	};
+		// 	if ("clipboard" in navigator) {
+		// 		navigator.clipboard
+		// 			.writeText(text)
+		// 			.then(() => {
+		// 				game.alert("分享内容复制成功");
+		// 			})
+		// 			.catch(() => {
+		// 				fallbackCopyTextToClipboard(text);
+		// 			});
+		// 	} else {
+		// 		fallbackCopyTextToClipboard(text);
+		// 	}
+		// });
+
+		var shareButton = ui.create.div(".menubutton.large.highlight.connectbutton.connectbutton2.pointerdiv", "退出房间", ui.window,ui.click.exit);
 
 		ui.connectStartButton = button;
 		ui.connectStartBar = bar;

@@ -14227,7 +14227,7 @@ export class Library {
 						},
 						true
 					);
-
+					ui.exitroom.style.visibility="hidden";
 					var findRoom = function (id) {
 						for (var room of ui.rooms) {
 							if (room.key == id) {
