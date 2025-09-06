@@ -10470,6 +10470,7 @@ export default async function () {
 				window.meijiu.onclick = function () {
 					window.meijiu.thrownn = true;
 				};
+				window.meijiu.style.visibility="hidden";
 				window.chatBg.appendChild(window.meijiu);
 				lib.setScroll(window.meijiu);
 				clickFK(window.meijiu);
@@ -10513,6 +10514,7 @@ export default async function () {
 					window.tuoxie.thrownn = true;
 				};
 
+				window.tuoxie.style.visibility="hidden";
 				window.chatBg.appendChild(window.tuoxie);
 				lib.setScroll(window.tuoxie);
 				clickFK(window.tuoxie);
@@ -10559,6 +10561,7 @@ export default async function () {
 				window.cailan.onclick = function () {
 					window.cailan.thrownn = true;
 				};
+				window.cailan.style.visibility="hidden";
 				window.chatBg.appendChild(window.cailan);
 				lib.setScroll(window.cailan);
 				clickFK(window.cailan);
@@ -10573,6 +10576,7 @@ export default async function () {
 				window.qicai.onclick = function () {
 					window.qicai.thrownn = true;
 				};
+				window.qicai.style.visibility="hidden";
 				window.chatBg.appendChild(window.qicai);
 				lib.setScroll(window.qicai);
 				clickFK(window.qicai);
@@ -10582,6 +10586,7 @@ export default async function () {
 				window.xiaojiu.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-230px;bottom:36px;transition:none;background-size:100% 100%";
 
 				window.xiaojiu.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/xiaojiu.png");
+				window.xiaojiu.style.visibility="hidden";
 				window.chatBg.appendChild(window.xiaojiu);
 				lib.setScroll(window.xiaojiu);
 				clickFK(window.xiaojiu);
@@ -10595,6 +10600,7 @@ export default async function () {
 
 				window.xueqiu.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/xueqiu.png");
 
+				window.xueqiu.style.visibility="hidden";
 				window.chatBg.appendChild(window.xueqiu);
 				lib.setScroll(window.xueqiu);
 				clickFK(window.xueqiu);
@@ -10612,6 +10618,7 @@ export default async function () {
 
 				window.xuwu.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/xuwu.png");
 
+				window.xuwu.style.visibility="hidden";
 				window.chatBg.appendChild(window.xuwu);
 				lib.setScroll(window.xuwu);
 				clickFK(window.xuwu);
@@ -10753,6 +10760,8 @@ export default async function () {
 
 				window.chatSendBottom = ui.create.div("", "", function () {
 					//发送按钮
+					console.log('发送按钮');
+					return;//有bug，先暂停使用
 					if (!window.input) return;
 					if (window.input.value == undefined) return;
 					window.sendInfo(window.input.value);
@@ -10810,7 +10819,7 @@ export default async function () {
 				window.ipt.style["background-image"] = "linear-gradient(rgba(0,0,0,0.2), rgba(0,0,0,0.4))";
 				//window.ipt.style['box-shadow']='rgba(0, 0, 0, 0.4) 0 0 0 1px, rgba(0, 0, 0, 0.2) 0 3px 10px';
 				if (window.input && window.input.value) window.input_value = window.input.value;
-				window.ipt.innerHTML = '<input type="text" value=' + (window.input_value || "现在只有鲜花和鸡蛋能用") + ' style="color:white;font-family:shousha;width:calc(100% - 10px);text-align:left;"></input>';
+				window.ipt.innerHTML = '<input type="text" value=' + (window.input_value || "聊天这块有bug暂不能使用") + ' style="color:white;font-family:shousha;width:calc(100% - 10px);text-align:left;"></input>';
 				window.input = window.ipt.querySelector("input");
 				window.input.style.backgroundImage = "url('" + lib.assetURL + "extension/十周年UI/shoushaUI/sayplay/say.png')";
 				window.input.style.backgroundSize = "120% 120%";
