@@ -422,7 +422,8 @@
 /*牌堆数*/
 /*同理，定义整体*/
 .cardRoundNumber {
-	top: 30px;
+	position: fixed;
+	top: 20px;
 	right: 123px;
 	/*牌堆数及游戏时间，轮数整体。越大越往左*/
 	font-family: "shousha";

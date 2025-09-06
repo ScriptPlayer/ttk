@@ -751,6 +751,8 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			},
 			//可点击函数（牌堆）
 			paidui() {
+				//console.log('不可查看牌堆');
+				return;//不可查看牌堆
 				if (!_status.gameStarted) return;
 				game.pause2();
 
