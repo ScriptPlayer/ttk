@@ -10461,29 +10461,7 @@ export default async function () {
 				window.hudongkuang.setBackgroundImage("extension/十周年UI/shoushaUI/sayplay/hudong.png");
 				window.chatBg.appendChild(window.hudongkuang);
 				//------1--美酒-------//
-				game.open_meijiu = function () {
-					//打开美酒函数
-					//这里
-					// var list = game.players;
-					// for (let i = 0; i < game.players.length; i++) {
-					// 	list[i].onclick = function () {
-					// 		var target = this;
-					// 		if (window.meijiu.thrownn == true) {
-					// 			for (let i = 0; i < 10; i++) {
-					// 				setTimeout(() => {
-					// 					if (i <= 8) game.me.throwEmotion(this, "flower");
-					// 					else game.me.throwEmotion(this, "wine");
-					// 					window.shuliang.innerText = window.shuliang.innerText - 1;
-					// 				}, 100 * i);
-					// 				setTimeout(() => {
-					// 					if (i <= 8) target.throwEmotion(game.me, "flower");
-					// 					else target.throwEmotion(game.me, "wine");
-					// 				}, 100 * i + 500);
-					// 			}
-					// 		}
-					// 	};
-					// }
-				};
+				game.open_meijiu = function () {};
 				window.meijiu = ui.create.div("hidden", "", game.open_meijiu);
 				window.meijiu.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-155px;bottom:173px;transition:none;background-size:100% 100%";
 
@@ -10525,34 +10503,7 @@ export default async function () {
 				lib.setScroll(window.xianhua);
 				clickFK(window.xianhua);
 				//-----3---拖鞋-------//
-				game.open_tuoxie = function () {
-					//打开拖鞋函数
-					//这里
-					// var list = game.players;
-					// var num = 10;
-					// for (let i = 0; i < game.players.length; i++) {
-					// 	list[i].onclick = function () {
-					// 		var target = this;
-					// 		if (window.tuoxie.thrownn == true) {
-					// 			for (let i = 0; i < num; i++) {
-					// 				setTimeout(() => {
-					// 					if (i <= 8) {
-					// 						game.me.throwEmotion(this, "egg");
-					// 						window.shuliang.innerText = window.shuliang.innerText - 1;
-					// 					} else {
-					// 						game.me.throwEmotion(this, "shoe");
-					// 						window.shuliang.innerText = window.shuliang.innerText - 1;
-					// 					}
-					// 				}, 100 * i);
-					// 				setTimeout(() => {
-					// 					if (i <= 8) target.throwEmotion(game.me, "egg");
-					// 					else target.throwEmotion(game.me, "shoe");
-					// 				}, 100 * i + 1000);
-					// 			}
-					// 		}
-					// 	};
-					// }
-				};
+				game.open_tuoxie = function () {};
 				window.tuoxie = ui.create.div("hidden", "", game.open_tuoxie);
 				window.tuoxie.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-155px;bottom:105px;transition:none;background-size:100% 100%";
 
@@ -10566,6 +10517,7 @@ export default async function () {
 				lib.setScroll(window.tuoxie);
 				clickFK(window.tuoxie);
 
+				//-----4---鸡蛋-------//
 				game.open_jidan = function () {
 					//打开鸡蛋函数
 					//这里
@@ -10598,28 +10550,7 @@ export default async function () {
 				clickFK(window.jidan);
 
 				//-----5--菜篮-------//
-				game.open_cailan = function () {
-					// //打开菜篮函数
-					// var list = game.players;
-					// for (let i = 0; i < game.players.length; i++) {
-					// 	list[i].onclick = function () {
-					// 		var target = this;
-					// 		if (window.cailan.thrownn == true) {
-					// 			for (let i = 0; i < 101; i++) {
-					// 				setTimeout(() => {
-					// 					if (i <= 99) game.me.throwEmotion(this, "flower");
-					// 					else game.me.throwEmotion(this, "wine");
-					// 					window.shuliang.innerText = window.shuliang.innerText - 1;
-					// 				}, 100 * i);
-					// 				setTimeout(() => {
-					// 					if (i <= 99) target.throwEmotion(game.me, "flower");
-					// 					else target.throwEmotion(game.me, "wine");
-					// 				}, 100 * i + 1000);
-					// 			}
-					// 		}
-					// 	};
-					// }
-				};
+				game.open_cailan = function () {};
 
 				window.cailan = ui.create.div("hidden", "", game.open_cailan);
 				window.cailan.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-80px;bottom:173px;transition:none;background-size:100% 100%";
@@ -10632,28 +10563,7 @@ export default async function () {
 				lib.setScroll(window.cailan);
 				clickFK(window.cailan);
 				//------6--七彩-------//
-				game.open_qicai = function () {
-					//打开七彩函数
-					// var list = game.players;
-					// for (let i = 0; i < game.players.length; i++) {
-					// 	list[i].onclick = function () {
-					// 		var target = this;
-					// 		if (window.qicai.thrownn == true) {
-					// 			for (let i = 0; i < 101; i++) {
-					// 				setTimeout(() => {
-					// 					if (i <= 99) game.me.throwEmotion(this, "egg");
-					// 					else game.me.throwEmotion(this, "shoe");
-					// 					window.shuliang.innerText = window.shuliang.innerText - 1;
-					// 				}, 100 * i);
-					// 				setTimeout(() => {
-					// 					if (i <= 99) target.throwEmotion(game.me, "egg");
-					// 					else target.throwEmotion(game.me, "shoe");
-					// 				}, 100 * i + 1000);
-					// 			}
-					// 		}
-					// 	};
-					// }
-				};
+				game.open_qicai = function () {};
 
 				window.qicai = ui.create.div("hidden", "", game.open_qicai);
 				window.qicai.style.cssText = "display: block;--w: 63px;--h: calc(var(--w) * 50/50);width: var(--w);height: var(--h);left:-80px;bottom:105px;transition:none;background-size:100% 100%";
