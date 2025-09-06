@@ -139,14 +139,23 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 		/*聊天按钮模块*/
 		if (lib.config.extension_十周年UI_LTAN == false) {
 			var liaotian = ui.create.node("img");
-			liaotian.src = lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/liaotian.png";
+			let openImgSrc=lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/liaotian.png";
+			liaotian.src = openImgSrc;
+			let closeImgSrc=lib.assetURL + "extension/十周年UI/shoushaUI/lbtn/images/uibutton/liaotianClose.png";
 			if (lib.config["extension_十周年UI_rightLayout"] == "on") {
 				liaotian.style.cssText = "display: block;--w: 135px;--h: calc(var(--w) * 1019/1400);width: var(--w);height: var(--h);position: absolute;top: calc(100% - 97px);right: calc(100% - 129px);background-color: transparent;z-index:3";
 			} else {
 				//左手模式聊天按钮参数
 				liaotian.style.cssText = "display: block; --w: 135px; --h: calc(var(--w) * 1019/1400); width: var(--w); height: var(--h); position: absolute; top: calc(100% - 97px); left: calc(100% - 129px); background-color: transparent; z-index: 3; transform: scaleX(-1);";
 			}
+			var isOpen=false;
 			liaotian.onclick = function () {
+				isOpen=!isOpen;
+				if(isOpen){
+					liaotian.src = closeImgSrc;
+				}else{
+					liaotian.src = openImgSrc;
+				}
 				if (lib.config["extension_说话_enable"]) {
 					game.showChatWordBackground();
 				} else {
