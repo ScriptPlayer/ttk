@@ -30,10 +30,10 @@
 		SERVICE_WORKER_LOAD_FAILED: ["serviceWorker加载失败！", "游戏内容或许会因此加载失败！"].join("\n"),
 	};
 
-	// 不支持file协议
-	if (location.protocol.startsWith("file")) {
-		return alert(globalText.REDIRECT_TIP);
-	}
+	// // 不支持file协议
+	// if (location.protocol.startsWith("file")) {
+	// 	return alert(globalText.REDIRECT_TIP);
+	// }
 
 	// // 必须启用serviceWorker
 	// if (!("serviceWorker" in navigator)) {
