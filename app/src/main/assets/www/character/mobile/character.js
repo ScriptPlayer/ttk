@@ -162,11 +162,24 @@ const characters = {
 			"xinfu_pdgyingshi"
 		]
 	},
-	pot_weiyan: {
+	"baoxin": {
+		sex: "male",
+		group: "qun",
+		hp: 4,
+		skills: ["mutao", "yimou"],
+		dieAudios: ["tw_baoxin"]
+	},
+	"peixiu": {
+		sex: "male",
+		group: "qun",
+		hp: 3,
+		skills: ["xingtu", "juezhi"]
+	},
+	"pot_weiyan": {
 		hp: 4,
 		sex: "male",
 		group: "shu",
-		skills: ["potzhongao", "potzhuangshi", "potyinzhan"],
+		skills: ["potzhongao", "potzhuangshi", "potyinzhan"]
 	},
 	"re_sunben": {
 		"sex": "male",

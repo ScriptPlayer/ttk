@@ -22,7 +22,7 @@ const characterSort = {
 	// mobile_bingshiPack: ["mb_sunjun", "pot_lusu", "pot_weiyan", "guoyuan", "mb_huangzu", "mb_tianfeng", "mb_luyusheng", "pot_taishici", "pot_dongzhao", "pot_lougui", "pot_yuji", "mb_xiahoushang", "pangxi", "sunsháo", "mb_yanghong", "pot_chendao", "mb_zhangyan"], //potential--潜在, 潜力, 可能, 电位, 潜能, 势
 	// mobile_laoyouji: ["friend_zhugeliang", "friend_xushu", "friend_pangtong", "friend_cuijun", "friend_shitao"],
 	// mobile_standard: ["xin_xiahoudun", "xin_zhangfei", "old_yuanshu"],
-	mobile_shenhua_feng: ["re_xiaoqiao", "xin_zhoutai"],
+	mobile_shenhua_feng: ["re_xiaoqiao", "peixiu", "baoxin", "xin_zhoutai"],
 	// mobile_shenhua_huo: ["re_pangtong", "re_sp_zhugeliang", "re_xunyu", "re_dianwei", "re_yanwen", "xin_yuanshao"],
 	mobile_shenhua_huo: ["re_sp_zhugeliang", "re_xunyu", "re_yanwen", "pot_weiyan"],
 	// mobile_shenhua_lin: ["re_dongzhuo", "re_sunjian", "re_zhurong"],

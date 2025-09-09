@@ -12138,6 +12138,158 @@ const skills = {
 			trigger.player.draw();
 		},
 	},
+	//鲍信
+	twmutao: {
+		audio: 2,
+		enable: "phaseUse",
+		filterTarget(card, player, target) {
+			return target.countCards("h") && target !== player;
+		},
+		usable: 1,
+		async content(event, trigger, player) {
+			let source = event.target;
+			let cards = source.getCards("h", { name: "sha" });
+			if (!cards.length) {
+				game.log("但", source, "没有", "#y杀", "！");
+				return;
+			}
+			let togive = source.getNext();
+			let gained;
+			while (true) {
+				let card = source.getCards("h", { name: "sha" }).randomGet();
+				if (togive == gained) {
+					break;
+				}
+				if (togive.isIn()) {
+					await source.give(card, togive);
+					gained = togive;
+				}
+				let num = togive == source ? 1 : 0;
+				if (source.countCards("h", { name: "sha" }) > num) {
+					togive = togive.getNext();
+				} else {
+					break;
+				}
+			}
+			source.line(togive);
+			let num = togive.countCards("h", { name: "sha" });
+			if (num) {
+				await togive.damage(Math.min(2, num), source);
+			}
+		},
+		ai: {
+			order: 10,
+			result: {
+				player(player, target) {
+					var numx = target.countCards("h", { name: "sha" }),
+						targetx = target,
+						map = {};
+					for (var i = 0; i < numx; i++) {
+						targetx = targetx.getNext();
+						map[targetx.playerid] ??= 0;
+						map[targetx.playerid]++;
+					}
+					var att = get.damageEffect(targetx, player, player);
+					return att * numx * Math.min(2, targetx.countCards("h", { name: "sha" }) + map[targetx.playerid]);
+				},
+			},
+		},
+	},
+	twyimou: {
+		audio: 2,
+		trigger: { global: "damageEnd" },
+		filter(event, player) {
+			return event.player.isIn() && event.player !== player && get.distance(event.player, player) <= 1;
+		},
+		logTarget: "player",
+		check(event, player) {
+			return get.attitude(player, event.player) > 0;
+		},
+		async content(event, trigger, player) {
+			const target = trigger.player,
+				name = get.translation(target);
+			if (trigger.player != player) {
+				player.addExpose(0.3);
+			}
+			let choiceList = [`令${name}获得牌堆里的一张【杀】`, `令${name}将一张手牌交给另一名角色，然后${name}摸两张牌`, `背水！${target != player ? "将所有手牌交给" + name + "，然后" : ""}依次执行以上所有选项`];
+			let list = ["选项一"];
+			if (target.countCards("h") && game.hasPlayer(t => t !== target)) {
+				list.push("选项二");
+			} else {
+				choiceList[1] = '<span style="opacity:0.5">' + choiceList[1] + "</span>";
+			}
+			if (player.countCards("h") && player !== target) {
+				list.push("背水！");
+			} else {
+				choiceList[2] = '<span style="opacity:0.5">' + choiceList[2] + "</span>";
+			}
+			const {
+				result: { control },
+			} = await player
+				.chooseControl(list)
+				.set("prompt", "毅谋：请选择一项")
+				.set("choiceList", choiceList)
+				.set("ai", function () {
+					var evt = _status.event.getTrigger(),
+						list = _status.event.list;
+					var player = _status.event.player;
+					var target = evt.player;
+					if ((target.hp >= target.countCards("h") + 2 || target == player) && list.includes("背水！")) {
+						return "背水！";
+					}
+					if (target.countCards("h") && list.includes("选项二")) {
+						return "选项二";
+					}
+					return "选项一";
+				})
+				.set("list", list);
+			if (control != "选项二") {
+				let card = get.cardPile2(function (card) {
+					return card.name == "sha";
+				});
+				if (card) {
+					await target.gain(card, "gain2");
+				} else {
+					game.log("但牌堆里已经没有", "#y杀", "了！");
+				}
+			}
+			if (control != "选项一") {
+				if (target.countCards("h") && game.hasPlayer(t => t !== target)) {
+					const result = await target
+						.chooseCardTarget({
+							prompt: "将一张手牌交给另一名其他角色并摸两张牌",
+							filterCard: true,
+							forced: true,
+							filterTarget: lib.filter.notMe,
+							ai1(card) {
+								return 1 / Math.max(0.1, get.value(card));
+							},
+							ai2(target) {
+								var player = _status.event.player,
+									att = get.attitude(player, target);
+								if (target.hasSkillTag("nogain")) {
+									att /= 9;
+								}
+								return 4 + att;
+							},
+						})
+						.forResult();
+					if (result?.bool && result?.cards?.length && result?.targets?.length) {
+						const targetx = result.targets[0];
+						target.line(targetx);
+						await target.give(result.cards, targetx);
+						await target.draw(2);
+					}
+				}
+			}
+			if (control == "背水！" && player != target && player.countCards("h")) {
+				await player.give(player.getCards("h"), target);
+			}
+		},
+		ai: {
+			threaten: 2.5,
+		},
+	},
 	//蒋济
 	jilun: {
 		audio: 2,
