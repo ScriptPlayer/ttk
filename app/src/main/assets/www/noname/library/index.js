@@ -5548,7 +5548,7 @@ export class Library {
 				},
 				connect_change_card: {
 					name: "启用手气卡",
-					init: false,
+					init: true,
 					frequent: true,
 					restart: true,
 				},
@@ -6255,7 +6255,7 @@ export class Library {
 				},
 				connect_change_card: {
 					name: "启用手气卡",
-					init: false,
+					init: true,
 					frequent: true,
 					restart: true,
 				},
@@ -7338,7 +7338,7 @@ export class Library {
 				},
 				connect_choice_zhu: {
 					name: "地主候选武将数",
-					init: 5,
+					init: 7,
 					input: true,
 					restart: true,
 					onblur(e) {
@@ -7355,7 +7355,7 @@ export class Library {
 				},
 				connect_choice_fan: {
 					name: "农民候选武将数",
-					init: 3,
+					init: 5,
 					input: true,
 					restart: true,
 					onblur(e) {
@@ -7372,7 +7372,7 @@ export class Library {
 				},
 				connect_change_card: {
 					name: "启用手气卡",
-					init: false,
+					init: true,
 					frequent: true,
 					restart: true,
 				},
@@ -7477,7 +7477,7 @@ export class Library {
 				},
 				choice_zhu: {
 					name: "地主候选武将数",
-					init: 5,
+					init: 7,
 					input: true,
 					restart: true,
 					onblur(e) {
@@ -7494,7 +7494,7 @@ export class Library {
 				},
 				choice_fan: {
 					name: "农民候选武将数",
-					init: 3,
+					init: 5,
 					input: true,
 					restart: true,
 					onblur(e) {
@@ -7768,7 +7768,7 @@ export class Library {
 				},
 				connect_change_card: {
 					name: "启用手气卡",
-					init: false,
+					init: true,
 					frequent: true,
 				},
 				connect_double_character: {
