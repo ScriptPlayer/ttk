@@ -204,8 +204,8 @@
 						}catch(e){}
 						window.localStorage.setItem('initConfigFinish',"1");
 						if(window.window.thisIsMobileDevice){
-							console.log('移动设备设置缩放0.9');
-							window.game.saveConfig("ui_zoom", "90%");
+							console.log('移动设备设置缩放0.83');
+							window.game.saveConfig("ui_zoom", "83%");
 							//window.game.documentZoom = 0.9;
 							//window.ui.updatez();
 						}
