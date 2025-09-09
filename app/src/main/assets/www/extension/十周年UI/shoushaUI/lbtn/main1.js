@@ -282,6 +282,10 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			});
 			var touxiang = ui.create.div(".touxiang", popuperContainer);
 			touxiang.addEventListener("click", event => {
+				if(game.players?.length>2){
+					alert('存活人数大于2不能投降');
+					return;
+				}
 				game.playAudio("../extension/十周年UI/shoushaUI/lbtn/images/SSCD/xuanzhe.mp3");
 
 				game.over();
