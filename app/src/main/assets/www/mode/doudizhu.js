@@ -138,7 +138,7 @@ export default () => {
 						game.zhu.addSkill(list);
 					}
 			}
-			game.addGlobalSkill("doudizhu_viewHandcard");
+			//game.addGlobalSkill("doudizhu_viewHandcard");//取消注释则可以看队友手牌
 			game.syncState();
 			event.trigger("gameStart");
 

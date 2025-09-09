@@ -7912,7 +7912,7 @@ player.removeVirtualEquip(card);
 						console.log('choosePlayerCard可以看');
 						//console.log(target);
 						//console.log(player);
-						if(player==target){
+						if(true){
 							event.dialog.add(hs);
 							directh = false;
 						}else{
@@ -8109,7 +8109,7 @@ player.removeVirtualEquip(card);
 						//console.log(target);
 						//console.log(player);
 						// event.dialog.add([hs, "blank"]);
-						if(player==target){
+						if(true){
 							event.dialog.add(hs);
 							directh = false;
 						}else{
@@ -8328,7 +8328,7 @@ player.removeVirtualEquip(card);
 					hs.randomSort();
 					if (event.visible || target.isUnderControl(true) || player.hasSkillTag("viewHandcard", null, target, true)) {
 						console.log('获取牌，可以看的手牌');
-						if(player==target){
+						if(true){
 							event.dialog.add(hs);
 							directh = false;
 						}else{
