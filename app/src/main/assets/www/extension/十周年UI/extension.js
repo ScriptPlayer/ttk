@@ -1209,11 +1209,43 @@ export default async function () {
 													else cardx.node.background.innerHTML = bgMark;
 												}
 												cardx.classList.add("fakejudge");
+												// card.node.judgeMark.node.judge.innerHTML = bgMark;
+												if(bgMark.trim()==='粮'){
+													//console.log('粮草');
+													cardx.node.judgeMark.node.judge.style.backgroundImage="url('" + lib.assetURL + "extension/十周年UI/assets/image/bingliang.png')"
+												}else if(bgMark.trim()==='乐'){
+													//console.log('乐不思蜀');
+													cardx.node.judgeMark.node.judge.style.backgroundImage="url('" + lib.assetURL + "extension/十周年UI/assets/image/lebu.png')"
+												}else if(bgMark.trim()==='电'){
+													//console.log('闪电');
+													cardx.node.judgeMark.node.judge.style.backgroundImage="url('" + lib.assetURL + "extension/十周年UI/assets/image/shandian.png')"
+												}
+												cardx.node.judgeMark.node.judge.style.backgroundSize="100%";
+												cardx.node.judgeMark.node.judge.style.backgroundRepeat="no-repeat";
+												cardx.node.judgeMark.node.judge.style.top="-25px";
+												cardx.node.judgeMark.node.judge.textContent="";
+												
 											} else {
 												delete cardx.viewAs;
 												//cardx.node.name2.innerHTML = `${suit}${number} ${VCard.name}`;
 												cardx.classList.remove("fakejudge");
 												if (window.decadeUI) cardx.node.judgeMark.node.judge.innerHTML = lib.translate[cardx.name + "_bg"] || get.translation(cardx.name)[0];
+												let bgMark=lib.translate[cardx.name + "_bg"] || get.translation(cardx.name)[0];
+												// card.node.judgeMark.node.judge.innerHTML = bgMark;
+												if(bgMark.trim()==='粮'){
+													//console.log('粮草');
+													cardx.node.judgeMark.node.judge.style.backgroundImage="url('" + lib.assetURL + "extension/十周年UI/assets/image/bingliang.png')"
+												}else if(bgMark.trim()==='乐'){
+													//console.log('乐不思蜀');
+													cardx.node.judgeMark.node.judge.style.backgroundImage="url('" + lib.assetURL + "extension/十周年UI/assets/image/lebu.png')"
+												}else if(bgMark.trim()==='电'){
+													//console.log('闪电');
+													cardx.node.judgeMark.node.judge.style.backgroundImage="url('" + lib.assetURL + "extension/十周年UI/assets/image/shandian.png')"
+												}
+												cardx.node.judgeMark.node.judge.style.backgroundSize="100%";
+												cardx.node.judgeMark.node.judge.style.backgroundRepeat="no-repeat";
+												cardx.node.judgeMark.node.judge.style.top="-25px";
+												cardx.node.judgeMark.node.judge.textContent="";
 											}
 											player.node.judges.insertBefore(cardx, player.node.judges.firstChild);
 											ui.updatej(player);
