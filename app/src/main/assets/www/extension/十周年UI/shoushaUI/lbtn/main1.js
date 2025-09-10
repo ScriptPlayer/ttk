@@ -163,6 +163,22 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				}
 			};
 			document.body.appendChild(liaotian);
+			var jilu = ui.create.div(".latn-jilu", ui.arena, ui.click.pause);
+			document.body.appendChild(jilu);
+			var paixuauto = ui.create.div(".lbtn-paixu", ui.arena);
+			paixuauto.onclick = function () {
+				plugin.click.paixu();
+				// if (window.paixuxx == false) {
+				// 	plugin.click.paixu();
+				// 	paixuauto.setBackgroundImage("extension/十周年UI/shoushaUI/lbtn/images/uibutton/btn-paixu.png");
+				// 	window.paixuxx = true;
+				// } else {
+				// 	plugin.click.paixu();
+				// 	paixuauto.setBackgroundImage("extension/十周年UI/shoushaUI/lbtn/images/uibutton/zidongpaixu.png");
+				// 	window.paixuxx = false;
+				// }
+			};
+			document.body.appendChild(paixuauto);
 		}
 		/*---------------------*/
 
@@ -271,11 +287,15 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 			});
 			var tuichu = ui.create.div(".tuichu", popuperContainer);
 			tuichu.addEventListener("click", event => {
+				//todo 退出替换为其它功能
+				return;
 				game.playAudio("../extension/十周年UI/shoushaUI/lbtn/images/SSCD/xuanzhe.mp3");
 				window.location.reload();
 			});
 			var taopao = ui.create.div(".taopao", popuperContainer);
 			taopao.addEventListener("click", event => {
+				//todo 逃跑替换为其它功能
+				return;
 				game.playAudio("../extension/十周年UI/shoushaUI/lbtn/images/SSCD/xuanzhe.mp3");
 
 				game.reload();
@@ -595,24 +615,24 @@ app.import(function (lib, game, ui, get, ai, _status, app) {
 				ui.create.div(".lbtn-control", node2, "   ");
 				/*ui.create.div('.lbtn-control1', node2, plugin.click.paixu);*/
 				//左手模式记录和牌序按钮
-				if (lib.config["extension_十周年UI_rightLayout"] == "on") {
-					var paixuauto = ui.create.div(".lbtn-paixu", ui.arena);
-					var jilu = ui.create.div(".latn-jilu", ui.arena, ui.click.pause);
-				} else {
-					var paixuauto = ui.create.div(".lbtn-paixu1", ui.arena);
-					var jilu = ui.create.div(".latn-jilu1", ui.arena, ui.click.pause);
-				}
-				paixuauto.onclick = function () {
-					if (window.paixuxx == false) {
-						plugin.click.paixu();
-						paixuauto.setBackgroundImage("extension/十周年UI/shoushaUI/lbtn/images/uibutton/btn-paixu.png");
-						window.paixuxx = true;
-					} else {
-						plugin.click.paixu();
-						paixuauto.setBackgroundImage("extension/十周年UI/shoushaUI/lbtn/images/uibutton/zidongpaixu.png");
-						window.paixuxx = false;
-					}
-				};
+				// if (lib.config["extension_十周年UI_rightLayout"] == "on") {
+				// 	var paixuauto = ui.create.div(".lbtn-paixu", ui.arena);
+				// 	var jilu = ui.create.div(".latn-jilu", ui.arena, ui.click.pause);
+				// } else {
+				// 	var paixuauto = ui.create.div(".lbtn-paixu1", ui.arena);
+				// 	var jilu = ui.create.div(".latn-jilu1", ui.arena, ui.click.pause);
+				// }
+				// paixuauto.onclick = function () {
+				// 	if (window.paixuxx == false) {
+				// 		plugin.click.paixu();
+				// 		paixuauto.setBackgroundImage("extension/十周年UI/shoushaUI/lbtn/images/uibutton/btn-paixu.png");
+				// 		window.paixuxx = true;
+				// 	} else {
+				// 		plugin.click.paixu();
+				// 		paixuauto.setBackgroundImage("extension/十周年UI/shoushaUI/lbtn/images/uibutton/zidongpaixu.png");
+				// 		window.paixuxx = false;
+				// 	}
+				// };
 
 				//-----------------//
 				//左手模式同上继续加一个显示手牌牌量新的按钮css
