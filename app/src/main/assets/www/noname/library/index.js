@@ -987,7 +987,7 @@ export class Library {
 				},
 				swipe: {
 					name: "滑动手势",
-					init: true,
+					init: false,
 					unfrequent: true,
 					intro: "在非滚动区域向四个方向滑动可执行对应操作",
 				},

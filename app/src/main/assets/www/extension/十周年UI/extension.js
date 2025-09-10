@@ -2866,7 +2866,7 @@ export default async function () {
 								// 	dialogEle.contentContainer.style.WebkitOverflowScrolling = "";
 								// 	dialogEle.ontouchstart = null;
 								// }else{
-								if (!notouchscroll&&window.thisIsMobileDevice===false) {
+								if (!notouchscroll) {
 									dialog.contentContainer.ontouchstart = ui.click.dialogtouchStart;
 									dialog.contentContainer.ontouchmove = ui.click.touchScroll;
 									dialog.contentContainer.style.WebkitOverflowScrolling = "touch";

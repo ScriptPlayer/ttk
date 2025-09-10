@@ -206,6 +206,7 @@
 						if(window.window.thisIsMobileDevice){
 							console.log('移动设备设置缩放0.83');
 							window.game.saveConfig("ui_zoom", "83%");
+							window.game.saveConfig("touchscreen", true);
 							//window.game.documentZoom = 0.9;
 							//window.ui.updatez();
 						}
