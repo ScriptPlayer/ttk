@@ -6336,6 +6336,17 @@ export class Game extends GameCompatible {
 						newObj.content = newContent; // 覆盖为排序后的数组
 					}
 
+					// 5. 新增条件处理：type 为 give 时，修改 content 第二个元素
+					if (obj.type === "give") {
+						if (Array.isArray(newObj.content) && newObj.content.length >= 2) { // 确保至少有2个元素
+							const originalSecondItem = newObj.content[1];
+							const newSecondItem = getMappedValue(originalSecondItem);
+							// 生成新数组（避免修改原数组）
+							newObj.content = [...newObj.content];
+							newObj.content[1] = newSecondItem; // 替换第二个元素
+						}
+					}
+
 					return newObj;
 				});
 
