@@ -5378,6 +5378,42 @@ export default async function () {
 									}
 								} else {
 									if (node.nature == "wood") {
+										//console.log(this);
+										//console.log(player.dataset.woodCount);//在元素上显示为data-wood-count
+										if(player.dataset.woodCount!=null){
+											let woodCount=Number(player.dataset.woodCount);
+											woodCount++;
+											player.dataset.woodCount=""+woodCount;
+											if(woodCount%3===0){
+												//医术高超
+												let randomWoodSpine = ['yishugaochao', 'Xyishugaochao', 'miaoshouhuichun', 'Xmiaoshouhuichun'].randomGet();
+												decadeUI.animation.playSpine(randomWoodSpine, {
+													scale: 0.7
+												});
+												if(randomWoodSpine.includes('yishugaochao')){
+													game.playAudio("../extension", decadeUI.extensionName, "audio/yishugaochao.mp3");
+												}else{
+													game.playAudio("../extension", decadeUI.extensionName, "audio/miaoshouhuichun.mp3");
+												}
+												
+												//有些动画没有play这个action
+												// decadeUI.animation.playSpine(
+												// 	{
+												// 		name: randomWoodSpine,
+												// 		action: "play",
+												// 	},
+												// 	{
+												// 		scale: 0.8
+												// 	}
+												// );
+											}
+										}else{
+											player.dataset.woodCount="1";
+										}
+										// let randomWoodSpine = ['yishugaochao', 'Xyishugaochao', 'miaoshouhuichun', 'Xmiaoshouhuichun'].randomGet();
+										// 		decadeUI.animation.playSpine(randomWoodSpine, {
+										// 			scale: 0.7
+										// 		});
 										decadeUI.animation.playSpine("effect_zhiliao", {
 											scale: 0.7,
 											parent: player,

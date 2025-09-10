@@ -1414,6 +1414,10 @@ if (decadeModule)
 				{
 					name: "effect_zhiliao"
 				},
+				{name: "yishugaochao"},
+				{name: "Xyishugaochao"},
+				{name: "miaoshouhuichun"},
+				{name: "Xmiaoshouhuichun"},
 				{name: "wanjunqushou"},
 				{name: "diankuangtulu"},
 				{name: "dao"},
