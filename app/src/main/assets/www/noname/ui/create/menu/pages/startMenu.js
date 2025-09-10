@@ -190,7 +190,7 @@ export const startMenu = function (connectMenu) {
 					};
 					infoconfig.connect_observe = {
 						name: "允许旁观",
-						init: true,
+						init: false,
 						connect: true,
 					};
 					infoconfig.connect_observe_handcard = {

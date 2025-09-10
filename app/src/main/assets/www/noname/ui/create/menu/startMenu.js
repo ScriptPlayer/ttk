@@ -93,7 +93,7 @@ export const startMenuData = {
 				if (!infoconfig.connect_observe) {
 					infoconfig.connect_observe = {
 						name: "允许旁观",
-						init: true,
+						init: false,
 						connect: true,
 					};
 				}
